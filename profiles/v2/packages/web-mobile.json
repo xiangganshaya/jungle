@@ -15,7 +15,8 @@
         "includeModules": {
           "gfx-webgl2": "inherit-project-setting"
         }
-      }
+      },
+      "name": "DZSH-3D"
     },
     "options": {
       "web-mobile": {
