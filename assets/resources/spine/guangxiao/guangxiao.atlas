@@ -1,0 +1,139 @@
+
+guangxiao.png
+size: 1405,1114
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+gx_01
+  rotate: false
+  xy: 936, 2
+  size: 354, 346
+  orig: 432, 432
+  offset: 37, 41
+  index: -1
+gx_02
+  rotate: false
+  xy: 605, 27
+  size: 329, 327
+  orig: 432, 432
+  offset: 53, 51
+  index: -1
+gx_03
+  rotate: false
+  xy: 297, 59
+  size: 306, 306
+  orig: 432, 432
+  offset: 65, 61
+  index: -1
+gx_04
+  rotate: false
+  xy: 831, 356
+  size: 282, 281
+  orig: 432, 432
+  offset: 77, 74
+  index: -1
+gx_05
+  rotate: true
+  xy: 2, 407
+  size: 257, 278
+  orig: 432, 432
+  offset: 89, 65
+  index: -1
+gx_06
+  rotate: true
+  xy: 234, 666
+  size: 234, 245
+  orig: 432, 432
+  offset: 100, 86
+  index: -1
+gx_07
+  rotate: false
+  xy: 477, 902
+  size: 235, 210
+  orig: 432, 432
+  offset: 110, 108
+  index: -1
+gx_08
+  rotate: false
+  xy: 725, 647
+  size: 292, 247
+  orig: 432, 432
+  offset: 124, 124
+  index: -1
+gx_09
+  rotate: false
+  xy: 714, 900
+  size: 249, 212
+  orig: 432, 432
+  offset: 139, 137
+  index: -1
+gx_10
+  rotate: false
+  xy: 2, 910
+  size: 250, 202
+  orig: 432, 432
+  offset: 109, 125
+  index: -1
+gx_11
+  rotate: false
+  xy: 254, 903
+  size: 221, 209
+  orig: 432, 432
+  offset: 109, 118
+  index: -1
+gx_12
+  rotate: false
+  xy: 965, 896
+  size: 221, 216
+  orig: 432, 432
+  offset: 107, 112
+  index: -1
+gx_13
+  rotate: false
+  xy: 2, 678
+  size: 230, 230
+  orig: 432, 432
+  offset: 105, 105
+  index: -1
+gx_14
+  rotate: false
+  xy: 481, 656
+  size: 242, 242
+  orig: 432, 432
+  offset: 99, 99
+  index: -1
+gx_15
+  rotate: false
+  xy: 1019, 639
+  size: 256, 255
+  orig: 432, 432
+  offset: 92, 92
+  index: -1
+gx_16
+  rotate: false
+  xy: 282, 388
+  size: 267, 266
+  orig: 432, 432
+  offset: 86, 87
+  index: -1
+gx_17
+  rotate: false
+  xy: 551, 367
+  size: 278, 278
+  orig: 432, 432
+  offset: 81, 81
+  index: -1
+gx_18
+  rotate: false
+  xy: 1115, 350
+  size: 288, 287
+  orig: 432, 432
+  offset: 76, 76
+  index: -1
+gx_19
+  rotate: false
+  xy: 2, 93
+  size: 293, 293
+  orig: 432, 432
+  offset: 73, 73
+  index: -1

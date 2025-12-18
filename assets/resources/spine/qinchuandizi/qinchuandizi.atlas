@@ -1,0 +1,132 @@
+
+qinchuandizi.png
+size: 295,266
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+biyan
+  rotate: false
+  xy: 142, 112
+  size: 42, 14
+  orig: 43, 14
+  offset: 0, 0
+  index: -1
+buzhe1
+  rotate: false
+  xy: 2, 4
+  size: 79, 65
+  orig: 79, 65
+  offset: 0, 0
+  index: -1
+buzhe2
+  rotate: false
+  xy: 92, 100
+  size: 48, 61
+  orig: 48, 61
+  offset: 0, 0
+  index: -1
+erhuan1
+  rotate: true
+  xy: 142, 102
+  size: 8, 19
+  orig: 8, 19
+  offset: 0, 0
+  index: -1
+erhuan2
+  rotate: true
+  xy: 163, 102
+  size: 8, 19
+  orig: 8, 19
+  offset: 0, 0
+  index: -1
+hudiejei
+  rotate: true
+  xy: 188, 3
+  size: 44, 74
+  orig: 44, 74
+  offset: 0, 0
+  index: -1
+jian
+  rotate: true
+  xy: 189, 49
+  size: 77, 58
+  orig: 78, 58
+  offset: 1, 0
+  index: -1
+liouhai1
+  rotate: true
+  xy: 249, 194
+  size: 70, 44
+  orig: 70, 44
+  offset: 0, 0
+  index: -1
+liouhai2
+  rotate: false
+  xy: 249, 63
+  size: 31, 50
+  orig: 31, 50
+  offset: 0, 0
+  index: -1
+liouhai3
+  rotate: true
+  xy: 264, 37
+  size: 24, 22
+  orig: 24, 22
+  offset: 0, 0
+  index: -1
+piaodai1
+  rotate: true
+  xy: 142, 128
+  size: 18, 68
+  orig: 18, 68
+  offset: 0, 0
+  index: -1
+piaodai2
+  rotate: false
+  xy: 151, 2
+  size: 35, 65
+  orig: 35, 65
+  offset: 0, 0
+  index: -1
+shenti
+  rotate: false
+  xy: 148, 148
+  size: 99, 116
+  orig: 99, 116
+  offset: 0, 0
+  index: -1
+toufa
+  rotate: true
+  xy: 2, 163
+  size: 101, 144
+  orig: 101, 144
+  offset: 0, 0
+  index: -1
+tuo
+  rotate: false
+  xy: 2, 71
+  size: 88, 90
+  orig: 88, 90
+  offset: 0, 0
+  index: -1
+xiouzi_L
+  rotate: true
+  xy: 83, 10
+  size: 57, 66
+  orig: 57, 66
+  offset: 0, 0
+  index: -1
+xiouzi_R
+  rotate: false
+  xy: 249, 115
+  size: 43, 77
+  orig: 43, 77
+  offset: 0, 0
+  index: -1
+yy
+  rotate: false
+  xy: 92, 69
+  size: 95, 29
+  orig: 97, 32
+  offset: 1, 2
+  index: -1

@@ -1,0 +1,27 @@
+
+appear.png
+size: 1063,110
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+hegnf
+  rotate: false
+  xy: 2, 8
+  size: 741, 100
+  orig: 750, 100
+  offset: 9, 0
+  index: -1
+wz
+  rotate: false
+  xy: 745, 2
+  size: 315, 52
+  orig: 317, 52
+  offset: 1, 0
+  index: -1
+wz2
+  rotate: false
+  xy: 745, 56
+  size: 316, 52
+  orig: 317, 52
+  offset: 1, 0
+  index: -1

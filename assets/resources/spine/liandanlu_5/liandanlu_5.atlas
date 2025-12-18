@@ -1,0 +1,13 @@
+
+liandanlu_5.png
+size: 164,130
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+ldl
+  rotate: false
+  xy: 2, 2
+  size: 160, 126
+  orig: 160, 128
+  offset: 0, 2
+  index: -1

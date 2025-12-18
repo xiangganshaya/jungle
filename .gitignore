@@ -1,0 +1,92 @@
+#/////////////////////////////////////////////////////////////////////////////
+# Fireball Projects
+#/////////////////////////////////////////////////////////////////////////////
+
+library/
+temp/
+local/
+build/
+node_modules/
+
+#/////////////////////////////////////////////////////////////////////////////
+# Logs and databases
+#/////////////////////////////////////////////////////////////////////////////
+
+*.log
+*.sql
+*.sqlite
+
+#/////////////////////////////////////////////////////////////////////////////
+# files for debugger
+#/////////////////////////////////////////////////////////////////////////////
+
+*.sln
+*.csproj
+*.pidb
+*.unityproj
+*.suo
+
+#/////////////////////////////////////////////////////////////////////////////
+# OS generated files
+#/////////////////////////////////////////////////////////////////////////////
+
+.DS_Store
+ehthumbs.db
+Thumbs.db
+
+#/////////////////////////////////////////////////////////////////////////////
+# exvim files
+#/////////////////////////////////////////////////////////////////////////////
+
+*UnityVS.meta
+*.err
+*.err.meta
+*.exvim
+*.exvim.meta
+*.vimentry
+*.vimentry.meta
+*.vimproject
+*.vimproject.meta
+.vimfiles.*/
+.exvim.*/
+quick_gen_project_*_autogen.bat
+quick_gen_project_*_autogen.bat.meta
+quick_gen_project_*_autogen.sh
+quick_gen_project_*_autogen.sh.meta
+.exvim.app
+
+#/////////////////////////////////////////////////////////////////////////////
+# webstorm files
+#/////////////////////////////////////////////////////////////////////////////
+
+.idea/
+
+#//////////////////////////
+# VS Code
+#//////////////////////////
+
+.vscode/
+
+#//////////////////////////
+# project
+#//////////////////////////
+
+.svn/
+
+#//////////////////////////
+.creator/
+
+build/jsb-default/frameworks/cocos2d-x/cocos/platform/android/libcocos2dx/build
+build/jsb-default/frameworks/cocos2d-x/build/cocos2d_libs.xcodeproj/xcuserdata/apple.xcuserdatad
+build/jsb-default/frameworks/runtime-src/proj.android-studio/app/.externalNativeBuild
+build/jsb-default/frameworks/runtime-src/proj.android-studio/game/.externalNativeBuild
+build/jsb-default/frameworks/runtime-src/proj.ios_mac/XXYSGameTS.xcodeproj/xcuserdata/apple.xcuserdatad
+build/jsb-default/frameworks/runtime-src/proj.ios_mac/XXYSGameTS.xcodeproj/project.xcworkspace/xcuserdata
+build/jsb-default/assets
+build/jsb-default/publish
+build/jsb-default/debug
+build/jsb-default/src
+build/jsb-default/js backups (useful for debugging)
+build/jsb-default/frameworks/cocos2d-x/build/Debug.win32
+build/jsb-default/frameworks/runtime-src/proj.win32/Debug.win32
+*.pyc

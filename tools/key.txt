@@ -1,0 +1,5 @@
+key: 8ujka8DSkq9DJMql
+
+path: 
+from: ../assets/resources/raw/raw.png
+to: assets/resources/native/b0/b051945f-0078-478a-9292-474d439579a3.xxxxx.png

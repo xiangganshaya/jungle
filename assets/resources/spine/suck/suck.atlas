@@ -1,0 +1,132 @@
+
+suck.png
+size: 1464,421
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+gx_01
+  rotate: true
+  xy: 739, 189
+  size: 230, 211
+  orig: 400, 400
+  offset: 83, 80
+  index: -1
+gx_02
+  rotate: false
+  xy: 799, 3
+  size: 201, 184
+  orig: 400, 400
+  offset: 97, 95
+  index: -1
+gx_03
+  rotate: false
+  xy: 510, 12
+  size: 171, 157
+  orig: 400, 400
+  offset: 112, 110
+  index: -1
+gx_04
+  rotate: true
+  xy: 501, 171
+  size: 248, 236
+  orig: 400, 400
+  offset: 71, 88
+  index: -1
+gx_05
+  rotate: false
+  xy: 1002, 4
+  size: 220, 208
+  orig: 400, 400
+  offset: 86, 101
+  index: -1
+gx_06
+  rotate: true
+  xy: 1185, 230
+  size: 189, 179
+  orig: 400, 400
+  offset: 102, 115
+  index: -1
+gx_07
+  rotate: false
+  xy: 2, 130
+  size: 260, 289
+  orig: 400, 400
+  offset: 76, 55
+  index: -1
+gx_08
+  rotate: false
+  xy: 264, 153
+  size: 235, 266
+  orig: 400, 400
+  offset: 87, 64
+  index: -1
+gx_09
+  rotate: true
+  xy: 952, 214
+  size: 205, 231
+  orig: 400, 400
+  offset: 101, 81
+  index: -1
+gx_10
+  rotate: false
+  xy: 1224, 33
+  size: 172, 195
+  orig: 400, 400
+  offset: 117, 99
+  index: -1
+gx_11
+  rotate: true
+  xy: 350, 12
+  size: 139, 158
+  orig: 400, 400
+  offset: 132, 117
+  index: -1
+gx_12
+  rotate: false
+  xy: 2, 7
+  size: 114, 121
+  orig: 400, 400
+  offset: 142, 135
+  index: -1
+gx_13
+  rotate: false
+  xy: 118, 11
+  size: 114, 117
+  orig: 400, 400
+  offset: 142, 135
+  index: -1
+gx_14
+  rotate: false
+  xy: 234, 11
+  size: 114, 117
+  orig: 400, 400
+  offset: 142, 135
+  index: -1
+gx_15
+  rotate: false
+  xy: 683, 52
+  size: 114, 117
+  orig: 400, 400
+  offset: 142, 135
+  index: -1
+gx_16
+  rotate: false
+  xy: 1366, 319
+  size: 96, 100
+  orig: 400, 400
+  offset: 151, 144
+  index: -1
+gx_17
+  rotate: false
+  xy: 683, 2
+  size: 37, 48
+  orig: 400, 400
+  offset: 183, 173
+  index: -1
+gx_18
+  rotate: false
+  xy: 1366, 265
+  size: 51, 52
+  orig: 400, 400
+  offset: 173, 169
+  index: -1

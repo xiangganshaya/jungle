@@ -1,0 +1,146 @@
+
+huangyidantong.png
+size: 226,266
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+biyan
+  rotate: true
+  xy: 191, 122
+  size: 53, 33
+  orig: 55, 44
+  offset: 1, 1
+  index: -1
+dishui-1
+  rotate: false
+  xy: 164, 83
+  size: 25, 74
+  orig: 25, 74
+  offset: 0, 0
+  index: -1
+dishui-2
+  rotate: false
+  xy: 61, 5
+  size: 24, 59
+  orig: 25, 59
+  offset: 1, 0
+  index: -1
+liuhai
+  rotate: false
+  xy: 107, 209
+  size: 78, 55
+  orig: 94, 55
+  offset: 0, 0
+  index: -1
+mawei-1
+  rotate: false
+  xy: 2, 76
+  size: 71, 85
+  orig: 71, 85
+  offset: 0, 0
+  index: -1
+mawei-2
+  rotate: false
+  xy: 106, 87
+  size: 56, 70
+  orig: 62, 70
+  offset: 6, 0
+  index: -1
+meimao
+  rotate: true
+  xy: 87, 15
+  size: 49, 11
+  orig: 51, 13
+  offset: 1, 1
+  index: -1
+qunzi
+  rotate: false
+  xy: 107, 159
+  size: 71, 48
+  orig: 71, 48
+  offset: 0, 0
+  index: -1
+shenti
+  rotate: false
+  xy: 2, 2
+  size: 57, 72
+  orig: 61, 73
+  offset: 4, 1
+  index: -1
+tou
+  rotate: false
+  xy: 2, 163
+  size: 103, 101
+  orig: 108, 103
+  offset: 4, 1
+  index: -1
+youshou-1
+  rotate: false
+  xy: 187, 177
+  size: 37, 40
+  orig: 39, 42
+  offset: 1, 1
+  index: -1
+youshou-2
+  rotate: false
+  xy: 191, 76
+  size: 29, 44
+  orig: 31, 46
+  offset: 1, 1
+  index: -1
+youtui-1
+  rotate: false
+  xy: 130, 19
+  size: 26, 43
+  orig: 28, 45
+  offset: 1, 1
+  index: -1
+youtui-2
+  rotate: false
+  xy: 182, 36
+  size: 27, 38
+  orig: 28, 38
+  offset: 0, 0
+  index: -1
+yy
+  rotate: true
+  xy: 75, 66
+  size: 95, 29
+  orig: 97, 32
+  offset: 1, 2
+  index: -1
+zhengyan
+  rotate: false
+  xy: 106, 64
+  size: 52, 21
+  orig: 54, 23
+  offset: 1, 1
+  index: -1
+zuobi-1
+  rotate: false
+  xy: 187, 219
+  size: 37, 45
+  orig: 39, 47
+  offset: 1, 1
+  index: -1
+zuobi-2
+  rotate: false
+  xy: 158, 13
+  size: 22, 49
+  orig: 24, 51
+  offset: 1, 1
+  index: -1
+zuotui-1
+  rotate: false
+  xy: 100, 18
+  size: 28, 44
+  orig: 30, 46
+  offset: 1, 1
+  index: -1
+zuotui-2
+  rotate: true
+  xy: 182, 6
+  size: 28, 36
+  orig: 31, 38
+  offset: 2, 1
+  index: -1
