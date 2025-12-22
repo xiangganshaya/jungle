@@ -11,7 +11,7 @@
     "6c48a": {
       "importer": "texture",
       "uuid": "22508656-9e73-443b-971a-770869a952ff@6c48a",
-      "displayName": "矩形",
+      "displayName": "窗口",
       "id": "6c48a",
       "name": "texture",
       "userData": {
@@ -35,7 +35,7 @@
     "f9941": {
       "importer": "sprite-frame",
       "uuid": "22508656-9e73-443b-971a-770869a952ff@f9941",
-      "displayName": "矩形",
+      "displayName": "窗口",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -46,10 +46,10 @@
         "offsetY": 0,
         "trimX": 0,
         "trimY": 0,
-        "width": 426,
-        "height": 357,
-        "rawWidth": 426,
-        "rawHeight": 357,
+        "width": 682,
+        "height": 418,
+        "rawWidth": 682,
+        "rawHeight": 418,
         "borderTop": 44,
         "borderBottom": 44,
         "borderLeft": 44,
@@ -61,17 +61,17 @@
         "meshType": 0,
         "vertices": {
           "rawPosition": [
-            -213,
-            -178.5,
+            -341,
+            -209,
             0,
-            213,
-            -178.5,
+            341,
+            -209,
             0,
-            -213,
-            178.5,
+            -341,
+            209,
             0,
-            213,
-            178.5,
+            341,
+            209,
             0
           ],
           "indexes": [
@@ -84,12 +84,12 @@
           ],
           "uv": [
             0,
-            357,
-            426,
-            357,
+            418,
+            682,
+            418,
             0,
             0,
-            426,
+            682,
             0
           ],
           "nuv": [
@@ -103,13 +103,13 @@
             1
           ],
           "minPos": [
-            -213,
-            -178.5,
+            -341,
+            -209,
             0
           ],
           "maxPos": [
-            213,
-            178.5,
+            341,
+            209,
             0
           ]
         },

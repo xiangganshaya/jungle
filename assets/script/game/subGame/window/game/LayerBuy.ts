@@ -56,7 +56,7 @@ export class LayerBuy extends GameBaseWindow {
     private _initInof() {
         let foodInfo: AnimateInfoIF = this._winData;
 
-        GameUtils.getInstance().setSpriteFrameByName(this.foodIcon, "image/images/d-" + foodInfo.animalId);
+        GameUtils.getInstance().setSpriteFrameByName(this.foodIcon, "image/images/d-" + foodInfo.id);
         GameUtils.getInstance().setString(this.foodName, `${foodInfo.foodName}`);
 
         this._exchangeCount = 1;
@@ -127,7 +127,7 @@ export class LayerBuy extends GameBaseWindow {
     onClickBuy() {
         let foodInfo: AnimateInfoIF = this._winData;
 
-        SubGameCtrl.getInstance().userStake(foodInfo.animalId, this._exchangeCount);
+        SubGameCtrl.getInstance().userStake(foodInfo.id, this._exchangeCount);
 
         this.onClickClose();
     }

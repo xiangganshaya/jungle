@@ -5,6 +5,7 @@ import WindowManager from 'db://assets/script/manager/WindowManager';
 import { WinId } from 'db://assets/script/config/WindowConfig';
 import GameUtils from 'db://assets/script/utils/GameUtils';
 import SubGameCtrl from '../../../subCtrls/SubGameCtrl';
+import UserManager from '../../../subUtils/UserManager';
 const { ccclass, property } = _decorator;
 
 
@@ -48,6 +49,7 @@ export class FoodItem extends Component {
         if (count <= 0) {
             this.buyCountBg.node.active = false;
             this.buyCount.node.active = false;
+            SpineManager.getInstance().playSpineAni(this.foodAni, null, "run", true, false);
             return;
         }
 
@@ -55,6 +57,7 @@ export class FoodItem extends Component {
         this.buyCount.node.active = true;
 
         GameUtils.getInstance().setString(this.buyCount, `x${count}`);
+        SpineManager.getInstance().playSpineAni(this.foodAni, null, "run2", true, false);
     }
 
     public playFoodAni() {
@@ -75,7 +78,7 @@ export class FoodItem extends Component {
     }
 
     public getFoodId() {
-        return this._info.animalId;
+        return this._info.id;
     }
 
     public getFoodWPos() {
@@ -89,6 +92,12 @@ export class FoodItem extends Component {
             WindowManager.getInstance().showSystemTip("当前不能下单");
             return;
         }
+        // let userInfo = UserManager.getInstance().getUserInfo();
+        // if (userInfo.leaves <= 0) {
+        //     WindowManager.getInstance().showWindow(WinId.LayerShopTip, { id: this._info.id, count: 1 });
+        // } else {
+        //     WindowManager.getInstance().showWindow(WinId.LayerBuy, this._info);
+        // }
         WindowManager.getInstance().showWindow(WinId.LayerBuy, this._info);
     }
 

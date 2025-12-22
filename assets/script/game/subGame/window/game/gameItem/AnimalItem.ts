@@ -16,7 +16,7 @@ const spinePaths = {
     "8": "spine/taishangzhanglao/taishangzhanglao",
 }
 
-const speed = 50;
+const speed = 120;
 
 @ccclass('AnimalItem')
 export class AnimalItem extends Component {
@@ -33,7 +33,7 @@ export class AnimalItem extends Component {
     private _endPathIndex = 0;
 
     //---------------
-    
+
     start() {
 
     }
@@ -48,14 +48,16 @@ export class AnimalItem extends Component {
             this.node.active = false;
             return;
         }
-        this.node.active = true;
-
+        this.animalAni.paused = true;
         let skd = await SpineManager.getInstance().getSkeletonData(skp);
         this.animalAni.skeletonData = skd;
+        this.node.active = true;
         SpineManager.getInstance().playSpineAni(this.animalAni, null, "run", true, false);
     }
 
     private _playRun() {
+        this.node.active = true;
+        this.animalAni.node.active = true;
         this.effectAni.node.active = false;
         Tween.stopAllByTarget(this.node);
 
@@ -86,6 +88,11 @@ export class AnimalItem extends Component {
 
     }
 
+    public stopRun() {
+        Tween.stopAllByTarget(this.node);
+        this.node.active = false;
+    }
+
     public runToFood(foodId: number) {
         this.node.setPosition(this._paths[0]);
         this.node.active = true;
@@ -112,6 +119,7 @@ export class AnimalItem extends Component {
         }
         this.node.setPosition(pathPos);
         this.node.active = true;
+        this.animalAni.node.active = true;
 
         if (foodPos.x > pathPos.x) {
             this.node.setScale(-1, 1)
@@ -120,6 +128,7 @@ export class AnimalItem extends Component {
         }
 
         SpineManager.getInstance().playSpineAni(this.animalAni, () => {
+            this.node.active = false;
             // SpineManager.getInstance().playSpineAni(this.animalAni, null, "run", true, false);
         }, "take", false, true);
     }

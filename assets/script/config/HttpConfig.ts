@@ -29,7 +29,7 @@ export class HttpConfig {
     // 投喂
     static feeding = {
         url: 'api/forest/feeding',
-        method: 'get',
+        method: 'post',
     } as HttpRequestModel;
     // 记录
     static gameRecord = {

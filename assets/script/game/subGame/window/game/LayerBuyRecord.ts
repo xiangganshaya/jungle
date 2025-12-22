@@ -17,6 +17,8 @@ export class LayerBuyRecord extends GameBaseWindow {
     scrollview: VirtualScrollView = null;
     @property(Label)
     tipLoadMore: Label = null;
+    @property(Node)
+    noData: Node = null;
 
     // LIFE-CYCLE CALLBACKS:
 
@@ -99,6 +101,7 @@ export class LayerBuyRecord extends GameBaseWindow {
         this._page = 0;
         this._datas.length = 0;
         this.tipLoadMore.node.active = false;
+        this.noData.active = true;
         this.scrollview.refreshList(this._datas);
 
         this._loadRecord();
@@ -116,6 +119,10 @@ export class LayerBuyRecord extends GameBaseWindow {
         this.scrollview.finishLoadMore(hasMore); // 完成加载
         // this.scrollview.scrollToBottom(true);
         this.scrollview.scrollToIndex(index, false, 0);
+        
+        if (this._datas.length > 0) {
+            this.noData.active = false;
+        }
     }
 
     onClickOutClose() {

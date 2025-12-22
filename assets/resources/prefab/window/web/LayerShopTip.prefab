@@ -2987,6 +2987,12 @@
       "__id__": 10
     },
     "isWindowAudio": false,
+    "diamond": {
+      "__id__": 89
+    },
+    "leaves": {
+      "__id__": 95
+    },
     "_id": ""
   },
   {

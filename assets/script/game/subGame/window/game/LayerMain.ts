@@ -51,6 +51,7 @@ export class LayerMain extends GameBaseWindow {
     private _paths: Vec3[] = [];
     private _gameState: GameState = GameState.NULL;
     private _tickTime: number = 0;
+    private _tickTimeMax: number = 10;
 
     //---------------
 
@@ -115,13 +116,17 @@ export class LayerMain extends GameBaseWindow {
         }
     }
 
+    private _updateCoinInfo() {
+        let userInfo = UserManager.getInstance().getUserInfo();
+        GameUtils.getInstance().setString(this.leaveCount, userInfo.leaves);
+    }
+
     private _initInof() {
         GameUtils.getInstance().setVisible(this.touchNode, false);
 
         let gm = SubGameCtrl.getInstance().getGameModel();
-        let userInfo = UserManager.getInstance().getUserInfo();
 
-        GameUtils.getInstance().setString(this.leaveCount, userInfo.leaves);
+        this._updateCoinInfo();
 
         for (let i = 0; i < this.foods.length; i++) {
             this.foods[i].node.active = true;
@@ -247,6 +252,8 @@ export class LayerMain extends GameBaseWindow {
         }
         this._gameState = gmd.status;
 
+        this._startTickTimer()
+
         if (this._gameState == GameState.SETTLE) {
             this._setAnimalInfo();
 
@@ -261,10 +268,16 @@ export class LayerMain extends GameBaseWindow {
             } else {
                 this._playRun();
             }
+        }else {
+            this.animal.stopRun()
         }
     }
 
     private _updateBetInfo() {
+        for (let i = 0; i < this.foods.length; i++) {
+            this.foods[i].updateItemBetInfo(0);
+        }
+
         let ubd = UserManager.getInstance().getUserInfo().userBetPrice;
         for (const key in ubd) {
             for (let i = 0; i < this.foods.length; i++) {
@@ -280,7 +293,8 @@ export class LayerMain extends GameBaseWindow {
         let gmd = SubGameCtrl.getInstance().getGameModel();
         let dt = Math.floor((new Date().getTime() - gmd.screeningTime) / 1000);
         this._tickTime = gmd.statusDuration - gmd.statusStarted - dt;
-        this.timeProgress.progress = (gmd.statusStarted + dt) / gmd.statusDuration * 100;
+        this._tickTimeMax = gmd.statusDuration;
+        this.timeProgress.progress = (gmd.statusStarted + dt) / gmd.statusDuration;
         this._updateTickTime(0);
         this.schedule(this._updateTickTime, 1);
     }
@@ -296,14 +310,20 @@ export class LayerMain extends GameBaseWindow {
             this._tickTime--;
         }
         if (this._tickTime < 0) {
+            this.timeProgress.progress = 0;
             this._stopTickTimer();
             return;
         }
+        this.timeProgress.progress = this._tickTime / this._tickTimeMax;
         let tip = '倒计时';
         if (SubGameCtrl.getInstance().getGameModel().status == GameState.SETTLE) {
             tip = '等待下次倒计时';
             if (this._tickTime == 1) {
-                WindowManager.getInstance().showWindow(WinId.LayerTip);
+                WindowManager.getInstance().showWindow(WinId.LayerTip, 1);
+            }
+        } else {
+            if (this._tickTime == 1) {
+                WindowManager.getInstance().showWindow(WinId.LayerTip, 0);
             }
         }
         this.timeLabel.string = tip + this._tickTime + "s";
@@ -375,7 +395,7 @@ export class LayerMain extends GameBaseWindow {
             case GameEvent.EVENT_GAME_UPDATE_WALLET:
                 {
                     //更新钱包信息
-                    // this._updateCoinInfo();
+                    this._updateCoinInfo();
                 }
                 break;
             case GameEvent.EVENT_GAME_STATE_INFO:

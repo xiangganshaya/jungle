@@ -163,7 +163,7 @@ export default class SubGameCtrl {
         if (this._gameModel && this._gameModel.towerList) {
             for (let i = 0; i < this._gameModel.towerList.length; i++) {
                 const element = this._gameModel.towerList[i];
-                if (this._gameModel.towerList[i].animalId == id) {
+                if (this._gameModel.towerList[i].id == id) {
                     return this._gameModel.towerList[i];
                 }
             }
@@ -395,7 +395,7 @@ export default class SubGameCtrl {
         if (count > userInfo.leaves) {
             // let gm = SubGameCtrl.getInstance().getGameModel();
 
-            WindowManager.getInstance().showWindow(WinId.LayerShopTip, animalId);
+            WindowManager.getInstance().showWindow(WinId.LayerShopTip, { id: animalId, count: count - userInfo.leaves, total: count });
             // WindowManager.getInstance().showSystemTip("灵石不足!");
 
             isEnougth = false
@@ -440,10 +440,10 @@ export default class SubGameCtrl {
         userInfo.userStakeLoading = false;
     }
 
-    public async buyLeavesAndStake(animalId: number, count: number) {
+    public async buyLeavesAndStake(animalId: number, count: number, total: number) {
         try {
-            this.buyLeaves(count);
-            this.userStake(animalId, count);
+            await this.buyLeaves(count);
+            await this.userStake(animalId, total);
 
         } catch (error) {
             // WindowManager.getInstance().showSystemTip(error);
@@ -456,7 +456,7 @@ export default class SubGameCtrl {
             // let res = {
             //     data: [
             //         {
-                        
+
             //             "probability": "111%",
             //             "animalId": "1",
             //             "animalName": "机智松鼠",

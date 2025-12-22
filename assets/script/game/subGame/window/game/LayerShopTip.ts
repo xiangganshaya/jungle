@@ -4,11 +4,15 @@ import { WinId } from '../../../../config/WindowConfig';
 import { LayerZindex } from '../../../../config/Config';
 import { GameEvent } from '../../../../config/GameEventConfig';
 import SubGameCtrl from '../../subCtrls/SubGameCtrl';
+import GameUtils from 'db://assets/script/utils/GameUtils';
 const { ccclass, property } = _decorator;
 
 @ccclass('LayerShopTip')
 export class LayerShopTip extends GameBaseWindow {
-
+    @property(Label)
+    diamond: Label = null;
+    @property(Label)
+    leaves: Label = null;
 
     // LIFE-CYCLE CALLBACKS:
 
@@ -34,12 +38,13 @@ export class LayerShopTip extends GameBaseWindow {
     }
 
     private _initInof() {
-
+        GameUtils.getInstance().setString(this.leaves, this._winData.count);
+        GameUtils.getInstance().setString(this.diamond, this._winData.count * 100);
     }
 
     onClickOK() {
-        SubGameCtrl.getInstance().buyLeavesAndStake(this._winData, 1);
-        
+        SubGameCtrl.getInstance().buyLeavesAndStake(this._winData.id, this._winData.count, this._winData.total);
+
         this.onClickClose();
     }
 

@@ -66,7 +66,7 @@ export interface NotifyMsgIF {
 }
 
 export interface AnimateInfoIF {
-    animalId: number
+    id: number
     animalName: string
     foodName: string
 }
