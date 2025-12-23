@@ -41,12 +41,12 @@ export default class HttpManager {
      * httpGet
      */
     public httpGet(url: string, handler, responseType = "text", headers = null, timeout = 10000) {
-        if (!JSB && IS_PROXY_PASS) {
-            let indexs = url.indexOf("/api/")
-            if (indexs != -1) {
-                url = url.substring(indexs)
-            }
-        }
+        // if (!JSB && IS_PROXY_PASS) {
+        //     let indexs = url.indexOf("/api/")
+        //     if (indexs != -1) {
+        //         url = url.substring(indexs)
+        //     }
+        // }
 
         let xhr = new XMLHttpRequest();
         this.httpEvents(xhr, handler);
@@ -83,12 +83,12 @@ export default class HttpManager {
      * httpPost
      */
     public httpPost(url, body, handler, responseType = "text", headers = null, timeout = 10000) {
-        if (!JSB && IS_PROXY_PASS) {
-            let indexs = url.indexOf("/api/")
-            if (indexs != -1) {
-                url = url.substring(indexs)
-            }
-        }
+        // if (!JSB && IS_PROXY_PASS) {
+        //     let indexs = url.indexOf("/api/")
+        //     if (indexs != -1) {
+        //         url = url.substring(indexs)
+        //     }
+        // }
 
         let xhr = new XMLHttpRequest();
         this.httpEvents(xhr, handler);

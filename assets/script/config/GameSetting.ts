@@ -40,6 +40,6 @@ if (DEBUG) {
     }
 
     if (typeof (IS_PROXY_PASS) == "undefined") {
-        (<any>window).IS_PROXY_PASS = true;
+        (<any>window).IS_PROXY_PASS = false;
     }
 }

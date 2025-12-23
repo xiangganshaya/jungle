@@ -26,6 +26,7 @@ export class FoodItem extends Component {
 
     // LIFE-CYCLE CALLBACKS:
     private _info: AnimateInfoIF = null;
+    private _aniName: string = "";
 
     //---------------
 
@@ -49,7 +50,10 @@ export class FoodItem extends Component {
         if (count <= 0) {
             this.buyCountBg.node.active = false;
             this.buyCount.node.active = false;
-            SpineManager.getInstance().playSpineAni(this.foodAni, null, "run", true, false);
+            if (this._aniName != "run") {
+                this._aniName = "run";
+                SpineManager.getInstance().playSpineAni(this.foodAni, null, this._aniName, true, false);
+            }
             return;
         }
 
@@ -57,7 +61,10 @@ export class FoodItem extends Component {
         this.buyCount.node.active = true;
 
         GameUtils.getInstance().setString(this.buyCount, `x${count}`);
-        SpineManager.getInstance().playSpineAni(this.foodAni, null, "run2", true, false);
+        if (this._aniName != "run2") {
+            this._aniName = "run2";
+            SpineManager.getInstance().playSpineAni(this.foodAni, null, this._aniName, true, false);
+        }
     }
 
     public playFoodAni() {
