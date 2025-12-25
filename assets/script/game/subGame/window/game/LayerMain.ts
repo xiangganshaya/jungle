@@ -25,11 +25,14 @@ export class LayerMain extends GameBaseWindow {
     @property(Node)
     touchNode: Node = null;
     // @property(Node)
-    // timeNode: Node = null;
+    // uiBottomNode: Node = null;
     @property(Label)
     timeLabel: Label = null;
     @property(ProgressBar)
     timeProgress: ProgressBar = null;
+
+    @property(Node)
+    midNode: Node = null;
 
     @property(Label)
     leaveCount: Label = null;
@@ -73,7 +76,8 @@ export class LayerMain extends GameBaseWindow {
         }
 
         let dc = ConfigManager.getInstance().getDesignResoulutionInfo();
-        this.hideNode.setScale(1, dc.uiMaxScale, 1);
+        this.hideNode.setScale(1, dc.uiScaleY, 1);
+        this.midNode.setScale(dc.uiScaleX, dc.uiScaleY, 1);
 
         this.schedule(this._checkIsInitOver, 0.01);
         // SubGameCtrl.getInstance().setIsInitOver(true); //test
@@ -128,10 +132,13 @@ export class LayerMain extends GameBaseWindow {
 
         this._updateCoinInfo();
 
+        let dc = ConfigManager.getInstance().getDesignResoulutionInfo();
         for (let i = 0; i < this.foods.length; i++) {
             this.foods[i].node.active = true;
             this.foods[i].setItemInfo(gm.towerList[i]);
+            this.foods[i].node.setScale(1/dc.uiScaleX, 1/dc.uiScaleY, 1);
         }
+        this.animal.node.setScale(1/dc.uiScaleX, 1/dc.uiScaleY, 1);
 
         this._isInit = true;
 

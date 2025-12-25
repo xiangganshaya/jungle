@@ -44,8 +44,9 @@ export class BuyRecordItem extends Component {
                 leafCount += info.buyRecords[i].cnt;
                 this.foods[i].node.active = true;
                 this.foods[i].setItemInfo(info.buyRecords[i].cnt);
+            } else {
+                this.foods[i].node.active = false;
             }
-            this.foods[i].node.active = false;
         }
 
         GameUtils.getInstance().setString(this.totalCount, `x${leafCount}`);

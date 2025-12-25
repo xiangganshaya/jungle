@@ -1,7 +1,7 @@
 import { debug, log } from "cc";
 import WindowManager from "../../../../manager/WindowManager";
 import SubGameCtrl from "../../subCtrls/SubGameCtrl";
-import { LoginModel, LoginResp, LogoutResp, NotifyMsg, PingResp, ProtocolEnum } from "../netMessage/MessageModes";
+import { LoginModel, LoginResp, LogoutResp, NotifyMsgIF, PingResp, ProtocolEnum } from "../netMessage/MessageModes";
 import NetBaseEvent from "./NetBaseEvent";
 
 export default class NetGameEvent extends NetBaseEvent {
@@ -38,7 +38,7 @@ export default class NetGameEvent extends NetBaseEvent {
                 break;
             case ProtocolEnum.NOTIFYMSG:
                 {
-                    let data: NotifyMsg = JSON.parse(msg);
+                    let data: NotifyMsgIF = JSON.parse(msg);
                     SubGameCtrl.getInstance().notifyMsg(data);
                 }
                 break;
