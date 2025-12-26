@@ -82,6 +82,7 @@ export interface GameInfoIF {
     hasBoss: number //当局是否有BOSS出场 0-没有 1-有
     appearanceAnimalId: number //当局出场动物ID 0-暂未有出场动物
     towerList: AnimateInfoIF[] //动物食物列表
+    stakeGiftPrice: number //钻石兑换单价
 
     // betsStatus: boolean // 是否下单过 未下单过不执行清除接口
     winnerList: WinnerItemIF[] //中奖用户列表

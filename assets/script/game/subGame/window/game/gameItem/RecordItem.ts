@@ -26,13 +26,18 @@ export class RecordItem extends Component {
 
     }
 
+    private _getTimeString(screening: string): string {
+        return screening.substring(0, 4) + "-" + screening.substring(4, 6) + "-" + screening.substring(6, 8) + "\n" +
+            screening.substring(8, 10) + ":" + screening.substring(10, 12) + ":" + screening.substring(12, 14);
+    }
+
     public async setItemInfo(info: ServerRecordItemIF) {
         GameUtils.getInstance().setSpriteFrameByName(this.animalIcon, "image/images/r-" + info.animalId);
         GameUtils.getInstance().setSpriteFrameByName(this.foodIcon, "image/images/d-" + info.animalId);
 
         GameUtils.getInstance().setString(this.animalName, info.animalName);
         GameUtils.getInstance().setString(this.foodName, info.foodName);
-        GameUtils.getInstance().setString(this.timeTip, info.screening);
+        GameUtils.getInstance().setString(this.timeTip, this._getTimeString(info.screening.toString()));
     }
 
     // update(deltaTime: number) {

@@ -310,9 +310,12 @@ export default class GameScene extends GameBaseScene {
     // }
 
     private async _relogin() {
+        if (this._isRelogin) {
+            return;
+        }
+
         this._isUserLoad = true;
         this._isRelogin = true;
-
 
         // this.scheduleOnce(this._showReloginLoading, 0.5);
         WindowManager.getInstance().showSysLoading(true);

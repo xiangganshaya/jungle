@@ -1724,8 +1724,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 37,
-      "height": 38
+      "width": 35,
+      "height": 39
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -2992,6 +2992,9 @@
     },
     "leaves": {
       "__id__": 95
+    },
+    "tipLabel": {
+      "__id__": 83
     },
     "_id": ""
   },

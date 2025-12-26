@@ -90,6 +90,7 @@ export class PreloadConfig {
             { type: PreloadConfigType.Window, winId: WinId.LayerBuyRecord },
             { type: PreloadConfigType.Window, winId: WinId.LayerRecord },
             { type: PreloadConfigType.Window, winId: WinId.LayerShop },
+            { type: PreloadConfigType.Window, winId: WinId.LayerShopTip },
             { type: PreloadConfigType.Window, winId: WinId.LayerRule },
             { type: PreloadConfigType.Window, winId: WinId.LayerTip },
 

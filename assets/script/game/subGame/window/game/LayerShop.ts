@@ -1,4 +1,4 @@
-import { _decorator, Component, instantiate, Label, debug, Node, ScrollView, Toggle, UITransform, EditBox, log } from 'cc';
+import { _decorator, Component, instantiate, Label, debug, Node, ScrollView, Toggle, UITransform, EditBox, log, RichText } from 'cc';
 import GameBaseWindow from '../../../base/GameBaseWindow';
 import { WinId } from '../../../../config/WindowConfig';
 import { LayerZindex } from '../../../../config/Config';
@@ -21,6 +21,9 @@ export class LayerShop extends GameBaseWindow {
 
     @property(Label)
     userBlance: Label = null; //用户余额
+
+    @property(RichText)
+    tipLabel: RichText = null;
 
     // LIFE-CYCLE CALLBACKS:
 
@@ -52,6 +55,8 @@ export class LayerShop extends GameBaseWindow {
 
     private _initInof() {
         this._exchangeCount = 1;
+        let gmd = SubGameCtrl.getInstance().getGameModel();
+        GameUtils.getInstance().setString(this.tipLabel, `每${gmd.stakeGiftPrice}钻石可以兑换1灵石！`);
         this._updateCostInfo();
     }
 

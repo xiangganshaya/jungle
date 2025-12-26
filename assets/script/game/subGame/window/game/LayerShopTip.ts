@@ -1,4 +1,4 @@
-import { _decorator, Component, instantiate, Label, debug, Node, ScrollView, Toggle, UITransform } from 'cc';
+import { _decorator, Component, instantiate, Label, debug, Node, ScrollView, Toggle, UITransform, RichText } from 'cc';
 import GameBaseWindow from '../../../base/GameBaseWindow';
 import { WinId } from '../../../../config/WindowConfig';
 import { LayerZindex } from '../../../../config/Config';
@@ -13,6 +13,8 @@ export class LayerShopTip extends GameBaseWindow {
     diamond: Label = null;
     @property(Label)
     leaves: Label = null;
+    @property(RichText)
+    tipLabel: RichText = null;
 
     // LIFE-CYCLE CALLBACKS:
 
@@ -38,8 +40,11 @@ export class LayerShopTip extends GameBaseWindow {
     }
 
     private _initInof() {
+        let gmd = SubGameCtrl.getInstance().getGameModel();
+        let need = this._winData.count * gmd.stakeGiftPrice;
+        GameUtils.getInstance().setString(this.tipLabel, `本次还需要<color=#ac4517>${need}</color>钻石兑换使用灵石参与玩法。\n使用失败会兑换到灵石余额中！`);
         GameUtils.getInstance().setString(this.leaves, this._winData.count);
-        GameUtils.getInstance().setString(this.diamond, this._winData.count * 100);
+        GameUtils.getInstance().setString(this.diamond, this._winData.count * gmd.stakeGiftPrice);
     }
 
     onClickOK() {
