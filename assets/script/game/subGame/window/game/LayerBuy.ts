@@ -18,6 +18,8 @@ export class LayerBuy extends GameBaseWindow {
     itemCountEditBox: EditBox = null;
 
     @property(Sprite)
+    animalIcon: Sprite = null;
+    @property(Sprite)
     foodIcon: Sprite = null;
     @property(Label)
     foodName: Label = null;
@@ -56,6 +58,7 @@ export class LayerBuy extends GameBaseWindow {
     private _initInof() {
         let foodInfo: AnimateInfoIF = this._winData;
 
+        GameUtils.getInstance().setSpriteFrameByName(this.animalIcon, "image/images/r-" + foodInfo.id);
         GameUtils.getInstance().setSpriteFrameByName(this.foodIcon, "image/images/d-" + foodInfo.id);
         GameUtils.getInstance().setString(this.foodName, `${foodInfo.foodName}`);
 
@@ -73,10 +76,14 @@ export class LayerBuy extends GameBaseWindow {
         // log("this._exchangeCount", totalPrice);
         // GameUtils.getInstance().setString(this.costPrice, totalPrice); //购买所需要的价格
         GameUtils.getInstance().setString(this.itemCountEditBox, this._exchangeCount); //购买数量
+        GameUtils.getInstance().setString(this.buyLabel, this._exchangeCount); //购买数量
 
-        let userInfo = UserManager.getInstance().getUserInfo();
-        GameUtils.getInstance().setString(this.buyLabel, `${this._exchangeCount}灵石`); //用户余额
+        GameUtils.getInstance().setString(this.buyLabel, `${this._exchangeCount}灵石`); //购买数量
 
+    }
+
+    private _updateCostCount() {
+        GameUtils.getInstance().setString(this.buyLabel, `${this._exchangeCount}灵石`); //购买数量
     }
 
     private _getRangeCount(count: number) {
@@ -106,10 +113,14 @@ export class LayerBuy extends GameBaseWindow {
         if (!/^\d+$/.test(text) && text != "") {
             WindowManager.getInstance().blurEditBox();
         }
+
+        this._updateCostCount();
     }
 
     onEditBoxEnd(editbox: EditBox) {
         WindowManager.getInstance().blurEditBox();
+
+        this._updateCostCount();
     }
 
     onClickMinus() {

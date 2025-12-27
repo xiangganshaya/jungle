@@ -9,6 +9,7 @@ export enum PrefabPath {
     window_common_SysMsgBox = "prefab/window/common/SysMsgBox",
     window_web_LayerMain = "prefab/window/web/LayerMain",
     window_web_LayerWin = "prefab/window/web/LayerWin",
+    window_web_LayerBossWin = "prefab/window/web/LayerBossWin",
     window_web_LayerRecord = "prefab/window/web/LayerRecord",
     window_web_LayerBuyRecord = "prefab/window/web/LayerBuyRecord",
     window_web_LayerTip = "prefab/window/web/LayerTip",

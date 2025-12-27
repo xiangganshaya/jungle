@@ -2,13 +2,13 @@ import { _decorator, Component, Label, debug, Node, Sprite, tween, Tween, sp, UI
 import GameBaseWindow from '../../../base/GameBaseWindow';
 import { WinId } from '../../../../config/WindowConfig';
 import { LayerZindex } from '../../../../config/Config';
-import { WinnerItemIF } from '../../net/netMessage/MessageModes';
 import GameUtils from 'db://assets/script/utils/GameUtils';
+import { WinnerItemIF } from '../../net/netMessage/MessageModes';
 
 const { ccclass, property } = _decorator;
 
-@ccclass('LayerWin')
-export class LayerWin extends GameBaseWindow {
+@ccclass('LayerBossWin')
+export class LayerBossWin extends GameBaseWindow {
 
     // @property(Node)
     // winNode: Node = null;
@@ -27,8 +27,8 @@ export class LayerWin extends GameBaseWindow {
 
     onLoad() {
         super.onLoad()
-        this._windowId = WinId.LayerWin;
-        this.setZIndex(LayerZindex.Window);
+        this._windowId = WinId.LayerBossWin;
+        this.setZIndex(LayerZindex.Window + 1);
 
     }
 
@@ -46,8 +46,7 @@ export class LayerWin extends GameBaseWindow {
     private _initInof() {
         let winInfo: WinnerItemIF = this._winData;
         GameUtils.getInstance().setSpriteFrameByUrl(this.winIcon, winInfo.rewardGiftIcon);  //获得礼物的icon
-        GameUtils.getInstance().setString(this.winName, `${winInfo.rewardGiftName}x${winInfo.rewardGiftCnt}`);
-        
+        GameUtils.getInstance().setString(this.winName, `${winInfo.rewardGiftName}x${winInfo.rewardGiftCnt}`); //获得礼物的名称和数量
 
         // this.scheduleOnce(this._timeClose, 5);
     }

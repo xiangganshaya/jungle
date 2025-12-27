@@ -112,17 +112,39 @@ export class LayerBuyRecord extends GameBaseWindow {
     }
 
     private _addRecord(recordList: BuyRecordIF[]) {
-        const hasMore = recordList.length > 0;
-        let index = this._datas.length - 1;
+        log("收到购买记录:", recordList);
+        let dataLength = this._datas.length;
         this._datas = this._datas.concat(recordList);
+
+        // 去除重复数据
+        let uniqueDatas = [];
+        let seen = new Set();
+        for (let i = 0; i < this._datas.length; i++) {
+            let data = this._datas[i];
+            if (!seen.has(data.screening)) {
+                seen.add(data.screening);
+                uniqueDatas.push(data);
+            }
+        }
+        this._datas = uniqueDatas;
+
+        //排序
+        this._datas.sort((a, b) => {
+            return b.screening.toString().localeCompare(a.screening.toString());
+        });
+
+        log("最终购买记录:", this._datas);
+        const hasMore = this._datas.length > dataLength;
+
+        if (this._datas.length > 0) {
+            this.noData.active = false;
+        }
+
+        let index = dataLength - 1;
         this.scrollview.refreshList(this._datas);
         this.scrollview.finishLoadMore(hasMore); // 完成加载
         // this.scrollview.scrollToBottom(true);
         this.scrollview.scrollToIndex(index, false, 0);
-        
-        if (this._datas.length > 0) {
-            this.noData.active = false;
-        }
     }
 
     onClickOutClose() {

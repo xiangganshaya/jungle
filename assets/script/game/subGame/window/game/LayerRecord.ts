@@ -41,42 +41,42 @@ export class LayerRecord extends GameBaseWindow {
             itemComp.setItemInfo(this._datas[index]);
         };
 
-        this.scrollview.onLoadMoreStateChangeFn = (state: LoadMoreState, offset: number) => {
-            switch (state) {
-                case LoadMoreState.IDLE:
-                    this.tipLoadMore.node.active = false;
-                    log('空闲状态');
+        // this.scrollview.onLoadMoreStateChangeFn = (state: LoadMoreState, offset: number) => {
+        //     switch (state) {
+        //         case LoadMoreState.IDLE:
+        //             this.tipLoadMore.node.active = false;
+        //             log('空闲状态');
 
-                    break;
-                case LoadMoreState.PULLING:
-                    log('正在上拉...', offset);
-                    // 显示"上拉加载更多"文字
-                    this.tipLoadMore.string = '上拉加载更多';
-                    this.tipLoadMore.node.active = true;
-                    break;
-                case LoadMoreState.READY:
-                    log('松开即可加载', offset);
-                    // 显示"松开加载"文字
-                    this.tipLoadMore.string = '松开加载';
-                    break;
-                case LoadMoreState.LOADING:
-                    log('正在加载...');
-                    // 显示加载动画和"正在加载"文字
-                    // 开始请求数据
-                    this.tipLoadMore.string = '正在加载...';
-                    this._loadRecord();
-                    break;
-                case LoadMoreState.COMPLETE:
-                    log('加载完成');
-                    this.tipLoadMore.string = '加载完成';
-                    break;
-                case LoadMoreState.NO_MORE:
-                    log('没有更多数据了');
-                    this.tipLoadMore.string = '没有更多数据了';
-                    // 显示"没有更多了"
-                    break;
-            }
-        };
+        //             break;
+        //         case LoadMoreState.PULLING:
+        //             log('正在上拉...', offset);
+        //             // 显示"上拉加载更多"文字
+        //             this.tipLoadMore.string = '上拉加载更多';
+        //             this.tipLoadMore.node.active = true;
+        //             break;
+        //         case LoadMoreState.READY:
+        //             log('松开即可加载', offset);
+        //             // 显示"松开加载"文字
+        //             this.tipLoadMore.string = '松开加载';
+        //             break;
+        //         case LoadMoreState.LOADING:
+        //             log('正在加载...');
+        //             // 显示加载动画和"正在加载"文字
+        //             // 开始请求数据
+        //             this.tipLoadMore.string = '正在加载...';
+        //             this._loadRecord();
+        //             break;
+        //         case LoadMoreState.COMPLETE:
+        //             log('加载完成');
+        //             this.tipLoadMore.string = '加载完成';
+        //             break;
+        //         case LoadMoreState.NO_MORE:
+        //             log('没有更多数据了');
+        //             this.tipLoadMore.string = '没有更多数据了';
+        //             // 显示"没有更多了"
+        //             break;
+        //     }
+        // };
         this.tipLoadMore.node.active = false;
         this.scrollview.refreshList(this._datas);
     }
@@ -108,21 +108,46 @@ export class LayerRecord extends GameBaseWindow {
     }
 
     private _loadRecord() {
-        SubGameCtrl.getInstance().gameRecord(this._page++);
+        // SubGameCtrl.getInstance().gameRecord(this._page++);
+        
+        SubGameCtrl.getInstance().gameRecord(this._page, 100);
     }
 
     private _addRecord(recordList: ServerRecordItemIF[]) {
-        const hasMore = recordList.length > 0;
-        let index = this._datas.length - 1;
+        log("收到交易记录:", recordList);
+        let dataLength = this._datas.length;
         this._datas = this._datas.concat(recordList);
-        this.scrollview.refreshList(this._datas);
-        this.scrollview.finishLoadMore(hasMore); // 完成加载
-        // this.scrollview.scrollToBottom(true);
-        this.scrollview.scrollToIndex(index, false, 0);
+
+        // 去除重复数据
+        let uniqueDatas = [];
+        let seen = new Set();
+        for (let i = 0; i < this._datas.length; i++) {
+            let data = this._datas[i];
+            if (!seen.has(data.screening)) {
+                seen.add(data.screening);
+                uniqueDatas.push(data);
+            }
+        }
+        this._datas = uniqueDatas;
+
+        //排序
+        this._datas.sort((a, b) => {
+            return b.screening.toString().localeCompare(a.screening.toString());
+        });
+
+        log("最终交易记录:", this._datas);
+        const hasMore = this._datas.length > dataLength;
+        // const hasMore = false;
 
         if (this._datas.length > 0) {
             this.noData.active = false;
         }
+
+        let index = dataLength - 1;
+        this.scrollview.refreshList(this._datas);
+        this.scrollview.finishLoadMore(hasMore); // 完成加载
+        // this.scrollview.scrollToBottom(true);
+        this.scrollview.scrollToIndex(index, false, 0);
     }
 
     onClickOutClose() {

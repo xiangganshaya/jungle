@@ -7,6 +7,8 @@ const { ccclass, property } = _decorator;
 @ccclass('RecordItem')
 export class RecordItem extends Component {
     @property(Sprite)
+    bossIcon: Sprite = null;
+    @property(Sprite)
     animalIcon: Sprite = null;
     @property(Sprite)
     foodIcon: Sprite = null;
@@ -32,6 +34,7 @@ export class RecordItem extends Component {
     }
 
     public async setItemInfo(info: ServerRecordItemIF) {
+        GameUtils.getInstance().setVisible(this.bossIcon, false);
         GameUtils.getInstance().setSpriteFrameByName(this.animalIcon, "image/images/r-" + info.animalId);
         GameUtils.getInstance().setSpriteFrameByName(this.foodIcon, "image/images/d-" + info.animalId);
 

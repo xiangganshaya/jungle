@@ -14,6 +14,7 @@ import GameEventManager from 'db://assets/script/manager/GameEventManager';
 import { GameState, WinnerItemIF } from '../../net/netMessage/MessageModes';
 import { AnimalItem } from './gameItem/AnimalItem';
 import { FoodItem } from './gameItem/FoodItem';
+import SpineManager from 'db://assets/script/manager/SpineManager';
 
 const { ccclass, property } = _decorator;
 
@@ -30,6 +31,18 @@ export class LayerMain extends GameBaseWindow {
     timeLabel: Label = null;
     @property(ProgressBar)
     timeProgress: ProgressBar = null;
+
+    @property(Label)
+    bossLabel: Label = null;
+    @property(ProgressBar)
+    bossProgress: ProgressBar = null;
+
+    @property(Node)
+    boosNode: Node = null;
+    @property(sp.Skeleton)
+    bossAni: sp.Skeleton = null;
+    @property(sp.Skeleton)
+    bossTipAni: sp.Skeleton = null;
 
     @property(Node)
     midNode: Node = null;
@@ -125,6 +138,14 @@ export class LayerMain extends GameBaseWindow {
         GameUtils.getInstance().setString(this.leaveCount, userInfo.leaves);
     }
 
+    private _updateBossProgress() {
+        let gmd = SubGameCtrl.getInstance().getGameModel();
+        let percent = gmd.bossProgression;
+        log("_updateBossProgress", percent);
+        this.bossLabel.string = `${percent}%`;
+        this.bossProgress.progress = percent / 100;
+    }
+
     private _initInof() {
         GameUtils.getInstance().setVisible(this.touchNode, false);
 
@@ -136,9 +157,9 @@ export class LayerMain extends GameBaseWindow {
         for (let i = 0; i < this.foods.length; i++) {
             this.foods[i].node.active = true;
             this.foods[i].setItemInfo(gm.towerList[i]);
-            this.foods[i].node.setScale(1/dc.uiScaleX, 1/dc.uiScaleY, 1);
+            this.foods[i].node.setScale(1 / dc.uiScaleX, 1 / dc.uiScaleY, 1);
         }
-        this.animal.node.setScale(1/dc.uiScaleX, 1/dc.uiScaleY, 1);
+        this.animal.node.setScale(1 / dc.uiScaleX, 1 / dc.uiScaleY, 1);
 
         this._isInit = true;
 
@@ -214,6 +235,26 @@ export class LayerMain extends GameBaseWindow {
         return null;
     }
 
+    private _showBossWin() {
+        let gmd = SubGameCtrl.getInstance().getGameModel();
+        WindowManager.getInstance().showWindow(WinId.LayerBossWin, gmd.bossWinInfo);
+    }
+
+    private _runBossAni() {
+        this.boosNode.active = true;
+        this.bossAni.node.active = true;
+        SpineManager.getInstance().playSpineAni(this.bossAni, () => {
+            this.bossTipAni.node.active = true;
+            SpineManager.getInstance().playSpineAni(this.bossTipAni, () => {
+                this.boosNode.active = false;
+                this.scheduleOnce(() => {
+                    this._showBossWin();
+                }, 0.5);
+            }, "run", false, true);
+        }, "run", false, true);
+
+    }
+
     private _showWin(winInfo: WinnerItemIF) {
         WindowManager.getInstance().showWindow(WinId.LayerWin, winInfo);
     }
@@ -244,6 +285,8 @@ export class LayerMain extends GameBaseWindow {
                     this.food.node.active = false;
                 })
                 .start();
+        } else {
+            WindowManager.getInstance().showSystemTip("很遗憾，与仙者暂无缘分～");
         }
 
     }
@@ -258,6 +301,8 @@ export class LayerMain extends GameBaseWindow {
             return;
         }
         this._gameState = gmd.status;
+
+        this._updateBossProgress();
 
         this._startTickTimer()
 
@@ -275,7 +320,10 @@ export class LayerMain extends GameBaseWindow {
             } else {
                 this._playRun();
             }
-        }else {
+            if (gmd.bossWinInfo) {
+                this._runBossAni();
+            }
+        } else {
             this.animal.stopRun()
         }
     }

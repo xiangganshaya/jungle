@@ -28,8 +28,8 @@
         "progress": 1,
         "state": "success",
         "stage": "build",
-        "message": "2025-12-26 19:33:15 build success in 19 s!",
-        "detailMessage": "// ---- build task cocos-service：onBeforeCompressSettings ----\r",
+        "message": "2025-12-27 23:06:05 build success in 17 s!",
+        "detailMessage": "web-mobile:(onBeforeCopyBuildTemplate) in 35 ms ✓, progress: 46%\r",
         "options": {
           "name": "DZSH-3D",
           "server": "",
@@ -76,7 +76,7 @@
           "__version__": "1.3.8",
           "logDest": "project://temp/builder/log/web-mobile10-10-2024 22-24.log"
         },
-        "time": "12-26-2025 19:32:56",
+        "time": "12-27-2025 23:05:48",
         "dirty": false
       }
     }

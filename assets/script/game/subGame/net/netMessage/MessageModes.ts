@@ -87,6 +87,7 @@ export interface GameInfoIF {
     // betsStatus: boolean // 是否下单过 未下单过不执行清除接口
     winnerList: WinnerItemIF[] //中奖用户列表
     winInfo: WinnerItemIF //中奖信息
+    bossWinInfo: WinnerItemIF //BOSS中奖信息
 }
 
 export interface ServerRecordItemIF {
@@ -122,8 +123,9 @@ export interface BuyRecordRewardIF {
 
 export interface BuyRecordIF {
     screening: string	//场次
-    animalId: string	//出场动物ID
-    buyRecords: BuyRecordItemIF[] //购买记录列表
+    costCnt: number	//总购买数量
+    winAnimalId: number	//出场动物ID
+    recordDetail: BuyRecordItemIF[] //购买记录列表
     rewardDetail: BuyRecordRewardIF //奖励信息
 }
 

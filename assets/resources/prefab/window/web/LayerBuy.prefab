@@ -3995,6 +3995,9 @@
     "itemCountEditBox": {
       "__id__": 99
     },
+    "animalIcon": {
+      "__id__": 62
+    },
     "foodIcon": {
       "__id__": 50
     },

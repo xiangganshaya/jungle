@@ -906,6 +906,7 @@ export default class GameScene extends GameBaseScene {
     }
 
     private _timeTryRelogin() {
+        this._isRelogin = false;
         this._relogin();
     }
 
@@ -914,13 +915,14 @@ export default class GameScene extends GameBaseScene {
         // WindowManager.getInstance().showSystemMsg("服务器已断开连接", () => {
         //     SubGameCtrl.getInstance().reLogin();
         // });
-        if (!this._isUserLoad) {
-            return;
-        }
-        this._isUserLoad = false;
+        // if (!this._isUserLoad) {
+        //     return;
+        // }
+        // this._isUserLoad = false;
 
-        this._timeTryRelogin();
-        this.schedule(this._timeTryRelogin, 15);
+        log("服务器已断开连接，尝试重新登录")
+        // this._timeTryRelogin();
+        this.schedule(this._timeTryRelogin, 5);
     }
 
     private _startDelayGarbageCollect() {
@@ -1074,24 +1076,27 @@ export default class GameScene extends GameBaseScene {
             case GameEvent.EVENT_HEARTBEAT_TIMEOUT:
             case GameEvent.EVENT_CLIENT_BREAK_NET: //主动断网的事件
                 {
+                    log("停止心跳")
                     this._stopMainHeartMsg();
                 }
                 break;
             case GameEvent.NET_CLIENT_NO_CONNECT: //网络断开或者异常的事件
                 {
+                    log("网络断开或者异常，停止心跳")
                     this._stopMainHeartMsg();
                     this._showNetNoConnectMsg();
                 }
                 break;
             case GameEvent.EVENT_GAME_LOGIN: //处理ws 链接成功的事件
                 {
+                    log("链接成功，开始心跳")
                     this.wsLogin();
                     this._startMainHeartMsg();
                 }
                 break;
             case GameEvent.EVENT_GAME_RELOGIN: //处理重新登录的事件
                 {
-                    this._relogin();
+                    // this._relogin();
                 }
             case GameEvent.SCENE_PRELOAD: //加载下一场景的事件处理
                 {

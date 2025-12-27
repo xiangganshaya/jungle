@@ -1,0 +1,125 @@
+
+hengfu.png
+size: 998,469
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+boss
+  rotate: true
+  xy: 754, 5
+  size: 462, 150
+  orig: 468, 153
+  offset: 4, 1
+  index: -1
+boss1
+  rotate: true
+  xy: 754, 5
+  size: 462, 150
+  orig: 468, 153
+  offset: 4, 1
+  index: -1
+dd_4
+  rotate: false
+  xy: 906, 325
+  size: 42, 42
+  orig: 50, 50
+  offset: 4, 4
+  index: -1
+di
+  rotate: false
+  xy: 2, 53
+  size: 750, 414
+  orig: 750, 451
+  offset: 0, 37
+  index: -1
+flare1_orange4
+  rotate: true
+  xy: 906, 369
+  size: 98, 90
+  orig: 100, 100
+  offset: 2, 5
+  index: -1
+sdxs_01
+  rotate: true
+  xy: 195, 26
+  size: 25, 70
+  orig: 32, 128
+  offset: 1, 3
+  index: -1
+sdxs_02
+  rotate: false
+  xy: 953, 116
+  size: 31, 95
+  orig: 32, 128
+  offset: 1, 8
+  index: -1
+sdxs_03
+  rotate: true
+  xy: 2, 20
+  size: 31, 95
+  orig: 32, 128
+  offset: 1, 11
+  index: -1
+sdxs_04
+  rotate: false
+  xy: 906, 208
+  size: 31, 115
+  orig: 32, 128
+  offset: 1, 12
+  index: -1
+sdxs_05
+  rotate: true
+  xy: 99, 21
+  size: 30, 94
+  orig: 32, 128
+  offset: 1, 33
+  index: -1
+sdxs_06
+  rotate: true
+  xy: 906, 2
+  size: 30, 88
+  orig: 32, 128
+  offset: 1, 39
+  index: -1
+sdxs_07
+  rotate: false
+  xy: 953, 44
+  size: 27, 70
+  orig: 32, 128
+  offset: 4, 57
+  index: -1
+sdxs_08
+  rotate: true
+  xy: 267, 27
+  size: 24, 57
+  orig: 32, 128
+  offset: 6, 60
+  index: -1
+tth_01
+  rotate: false
+  xy: 906, 34
+  size: 30, 172
+  orig: 30, 181
+  offset: 0, 0
+  index: -1
+tth_02
+  rotate: false
+  xy: 950, 213
+  size: 20, 154
+  orig: 30, 179
+  offset: 2, 13
+  index: -1
+tth_04
+  rotate: false
+  xy: 972, 216
+  size: 16, 151
+  orig: 30, 181
+  offset: 7, 17
+  index: -1
+tth_06
+  rotate: false
+  xy: 938, 49
+  size: 13, 157
+  orig: 30, 181
+  offset: 7, 15
+  index: -1
