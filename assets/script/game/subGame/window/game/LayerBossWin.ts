@@ -46,7 +46,11 @@ export class LayerBossWin extends GameBaseWindow {
     private _initInof() {
         let winInfo: WinnerItemIF = this._winData;
         GameUtils.getInstance().setSpriteFrameByUrl(this.winIcon, winInfo.rewardGiftIcon);  //获得礼物的icon
-        GameUtils.getInstance().setString(this.winName, `${winInfo.rewardGiftName}x${winInfo.rewardGiftCnt}`); //获得礼物的名称和数量
+        if (winInfo.rewardGiftCnt) {
+            GameUtils.getInstance().setString(this.winName, `${winInfo.rewardGiftName}x${winInfo.rewardGiftCnt}`); //获得礼物的名称和数量
+        }else {
+            GameUtils.getInstance().setString(this.winName, `${winInfo.rewardGiftName}`); //获得礼物的名称
+        }
 
         // this.scheduleOnce(this._timeClose, 5);
     }

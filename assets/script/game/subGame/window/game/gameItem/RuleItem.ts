@@ -32,7 +32,7 @@ export class RuleItem extends Component {
 
         GameUtils.getInstance().setString(this.animalName, info.animalName);
         GameUtils.getInstance().setString(this.foodName, info.foodName);
-        GameUtils.getInstance().setString(this.probability, info.probability);
+        GameUtils.getInstance().setString(this.probability, `${info.probability}%`);
     }
 
     // update(deltaTime: number) {

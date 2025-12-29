@@ -36,13 +36,13 @@ export class BuyRecordItem extends Component {
     }
 
     public async setItemInfo(info: BuyRecordIF) {
-        GameUtils.getInstance().setVisible(this.bossIcon, false);
+        GameUtils.getInstance().setVisible(this.bossIcon, info.hasBoss != 0);
         GameUtils.getInstance().setSpriteFrameByName(this.animalIcon, "image/images/r-" + info.winAnimalId);
         if (info.rewardDetail && info.rewardDetail.animalId == info.winAnimalId) {
-            GameUtils.getInstance().setSpriteFrameByName(this.statusTipBg, "image/images/tip_fail_bg");
+            GameUtils.getInstance().setSpriteFrameByName(this.statusTipBg, "image/images/tip_suc_bg");
             GameUtils.getInstance().setString(this.statusTip, "交易成功");
         } else {
-            GameUtils.getInstance().setSpriteFrameByName(this.statusTipBg, "image/images/tip_suc_bg");
+            GameUtils.getInstance().setSpriteFrameByName(this.statusTipBg, "image/images/tip_fail_bg");
             GameUtils.getInstance().setString(this.statusTip, "交易失败");
         }
         // let leafCount = 0

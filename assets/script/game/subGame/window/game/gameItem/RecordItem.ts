@@ -34,7 +34,7 @@ export class RecordItem extends Component {
     }
 
     public async setItemInfo(info: ServerRecordItemIF) {
-        GameUtils.getInstance().setVisible(this.bossIcon, false);
+        GameUtils.getInstance().setVisible(this.bossIcon, info.hasBoss != 0);
         GameUtils.getInstance().setSpriteFrameByName(this.animalIcon, "image/images/r-" + info.animalId);
         GameUtils.getInstance().setSpriteFrameByName(this.foodIcon, "image/images/d-" + info.animalId);
 

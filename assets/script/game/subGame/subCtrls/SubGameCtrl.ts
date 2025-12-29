@@ -255,15 +255,25 @@ export default class SubGameCtrl {
                 this._gameModel.appearanceAnimalId = md.appearanceAnimalId;
                 this._gameModel.winnerList = md.winnerList || [];
                 this._gameModel.winInfo = null;
+                this._gameModel.bossWinInfo = null;
 
                 let userId = UserManager.getInstance().getUserInfo().userId;
                 for (let i = 0; i < this._gameModel.winnerList.length; i++) {
-                    if (this._gameModel.winnerList[i].userId == userId) {
+                    if (Number(this._gameModel.winnerList[i].userId) == Number(userId)) {
                         this._gameModel.winInfo = this._gameModel.winnerList[i];
                         break;
                     }
                 }
-                this._gameModel.winInfo = this._gameModel.winnerList[0];
+                if (md.hasBoss != 0) {
+                    this._gameModel.bossWinInfo = {
+                        userId: md.winBossUserId,
+                        userName: md.winBossUserName,
+                        rewardGiftName: md.winBossGiftName,
+                        rewardGiftIcon: md.winBossGiftIcon,
+                        rewardGiftValue: md.winBossGiftPrice,
+                        rewardGiftCnt: md.winBossGiftCnt,
+                    };
+                }
             }
             GameEventManager.getInstance().dispatchGameEvent(GameEvent.EVENT_GAME_STATE_INFO);
         }

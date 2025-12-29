@@ -15,6 +15,7 @@ import { GameState, WinnerItemIF } from '../../net/netMessage/MessageModes';
 import { AnimalItem } from './gameItem/AnimalItem';
 import { FoodItem } from './gameItem/FoodItem';
 import SpineManager from 'db://assets/script/manager/SpineManager';
+import { BossWinItem } from './gameItem/BossWinItem';
 
 const { ccclass, property } = _decorator;
 
@@ -32,6 +33,8 @@ export class LayerMain extends GameBaseWindow {
     @property(ProgressBar)
     timeProgress: ProgressBar = null;
 
+    @property(BossWinItem)
+    bossWinItem: BossWinItem = null;
     @property(Label)
     bossLabel: Label = null;
     @property(ProgressBar)
@@ -167,41 +170,6 @@ export class LayerMain extends GameBaseWindow {
 
         this._updateGameState();
 
-
-        // this.scheduleOnce(() => {
-        //     SubGameCtrl.getInstance().notifyMsg({
-        //         screening: "",
-        //         "serverTime": 178989123123, //13位时间戳
-        //         'type': 'stat', //推送类型
-        //         "state": 2, //1-就绪(可喂食) 2-动物出场
-        //         "statusStarted": 0, //状态已开始秒数
-        //         "statusDuration": 30, //状态总时长
-
-        //         //以下参数只有状态为2时才有
-        //         "hasBoss": 1, //当局是否有BOSS出场 0-没有 1-有
-        //         "appearanceAnimalId": 1, //当局出场动物ID 0-暂未有出场动物
-        //         "bossProgression": 22.01, //BOSS进度
-
-        //         //中奖用户列表
-        //         winnerList: [
-        //             {
-        //                 "userId": "1",
-        //                 "rewardGiftName": "小心心", //奖励礼物名称
-        //                 "rewardGiftIcon": "https://www.baidu.com/t.jpg",//奖励礼物ICON
-        //                 "rewardGiftValue": 100, //奖励礼物价值
-        //                 "rewardGiftCnt": 10, //奖励礼物数量
-        //             },
-        //             {
-        //                 "userId": "2",
-        //                 "rewardGiftName": "小心心", //奖励礼物名称
-        //                 "rewardGiftIcon": "https://www.baidu.com/t.jpg",//奖励礼物ICON
-        //                 "rewardGiftValue": 100, //奖励礼物价值
-        //                 "rewardGiftCnt": 10, //奖励礼物数量
-        //             }
-        //         ]
-        //     }
-        //     );
-        // }, 3);
     }
 
     private _resetGameState() {
@@ -237,7 +205,16 @@ export class LayerMain extends GameBaseWindow {
 
     private _showBossWin() {
         let gmd = SubGameCtrl.getInstance().getGameModel();
-        WindowManager.getInstance().showWindow(WinId.LayerBossWin, gmd.bossWinInfo);
+        if (gmd.bossWinInfo) {
+            let userInfo = UserManager.getInstance().getUserInfo();
+
+            if (Number(gmd.bossWinInfo.userId) == Number(userInfo.userId)) {
+                WindowManager.getInstance().showWindow(WinId.LayerBossWin, gmd.bossWinInfo);
+            } else {
+                this.bossWinItem.node.active = true;
+                this.bossWinItem.setItemInfo(gmd.bossWinInfo);
+            }
+        }
     }
 
     private _runBossAni() {
@@ -302,6 +279,9 @@ export class LayerMain extends GameBaseWindow {
         }
         this._gameState = gmd.status;
 
+        this.bossWinItem.node.active = false;
+        this.boosNode.active = false;
+
         this._updateBossProgress();
 
         this._startTickTimer()
@@ -321,7 +301,16 @@ export class LayerMain extends GameBaseWindow {
                 this._playRun();
             }
             if (gmd.bossWinInfo) {
-                this._runBossAni();
+                let userInfo = UserManager.getInstance().getUserInfo();
+                if (Number(gmd.bossWinInfo.userId) == Number(userInfo.userId)) {
+                    this.scheduleOnce(() => {
+                        this._runBossAni();
+                    }, 1);
+                } else {
+                    this.scheduleOnce(() => {
+                        this._showBossWin();
+                    }, 1.5);
+                }
             }
         } else {
             this.animal.stopRun()

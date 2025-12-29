@@ -41,6 +41,15 @@ export enum GameState {
     WAITING = 3, // 等待中
 }
 
+export interface BossWinnerItemIF {
+    userId: string //用户ID,
+    userName: string //用户名称
+    rewardGiftName: string //奖励礼物名称
+    rewardGiftIcon: string //奖励礼物ICON
+    rewardGiftValue: number //奖励礼物价值
+    rewardGiftCnt: number //奖励礼物数量
+}
+
 export interface WinnerItemIF {
     userId: string //用户ID,
     rewardGiftName: string //奖励礼物名称
@@ -58,9 +67,16 @@ export interface NotifyMsgIF {
     statusDuration: number //状态总时长
 
     //以下参数只有状态为2时才有
+    appearanceAnimalId: number //当局出场动物ID 0-暂未有出场动物
     bossProgression: number //BOSS进度
     hasBoss: number //当局是否有BOSS出场 0-没有 1-有
-    appearanceAnimalId: number //当局出场动物ID 0-暂未有出场动物
+    winBossUserId: string //当局BOSS中奖用户ID 没有则为空字符串
+    winBossUserName: string //当局BOSS中奖用户名称 没有则为空字符串
+    winBossGiftName: string //当局BOSS中奖奖励礼物名称
+    winBossGiftId: number //当局BOSS中奖奖励礼物ID
+    winBossGiftPrice: number //当局BOSS中奖奖励礼物价值
+    winBossGiftIcon: string //当局BOSS中奖奖励礼物图标URL
+    winBossGiftCnt: number //当局BOSS中奖奖励礼物数量
     //中奖用户列表
     winnerList: WinnerItemIF[]
 }
@@ -87,7 +103,7 @@ export interface GameInfoIF {
     // betsStatus: boolean // 是否下单过 未下单过不执行清除接口
     winnerList: WinnerItemIF[] //中奖用户列表
     winInfo: WinnerItemIF //中奖信息
-    bossWinInfo: WinnerItemIF //BOSS中奖信息
+    bossWinInfo: BossWinnerItemIF //BOSS中奖信息
 }
 
 export interface ServerRecordItemIF {
@@ -95,6 +111,7 @@ export interface ServerRecordItemIF {
     animalId: string	//出场动物ID
     animalName: string	//动物名称
     foodName: string	//食物名称
+    hasBoss: number	//当局是否有BOSS出场 0-没有 1-有
 }
 
 export interface ServerRecordIF {
@@ -125,6 +142,7 @@ export interface BuyRecordIF {
     screening: string	//场次
     costCnt: number	//总购买数量
     winAnimalId: number	//出场动物ID
+    hasBoss: number	//当局是否有BOSS出场 0-没有 1-有
     recordDetail: BuyRecordItemIF[] //购买记录列表
     rewardDetail: BuyRecordRewardIF //奖励信息
 }
