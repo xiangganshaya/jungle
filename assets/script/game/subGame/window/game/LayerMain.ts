@@ -301,16 +301,20 @@ export class LayerMain extends GameBaseWindow {
                 this._playRun();
             }
             if (gmd.bossWinInfo) {
-                let userInfo = UserManager.getInstance().getUserInfo();
-                if (Number(gmd.bossWinInfo.userId) == Number(userInfo.userId)) {
-                    this.scheduleOnce(() => {
-                        this._runBossAni();
-                    }, 1);
-                } else {
-                    this.scheduleOnce(() => {
-                        this._showBossWin();
-                    }, 1.5);
-                }
+                // let userInfo = UserManager.getInstance().getUserInfo();
+                // if (Number(gmd.bossWinInfo.userId) == Number(userInfo.userId)) {
+                //     this.scheduleOnce(() => {
+                //         this._runBossAni();
+                //     }, 1);
+                // } else {
+                //     this.scheduleOnce(() => {
+                //         this._showBossWin();
+                //     }, 1.5);
+                // }
+
+                this.scheduleOnce(() => {
+                    this._runBossAni();
+                }, 1);
             }
         } else {
             this.animal.stopRun()

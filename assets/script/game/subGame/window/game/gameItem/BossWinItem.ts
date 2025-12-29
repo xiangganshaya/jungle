@@ -5,6 +5,8 @@ const { ccclass, property } = _decorator;
 
 @ccclass('BossWinItem')
 export class BossWinItem extends Component {
+    @property(Label)
+    bossEmptyTip: Label = null;
     @property(ScrollView)
     scrollView: ScrollView = null;
     @property(Label)
@@ -22,14 +24,26 @@ export class BossWinItem extends Component {
     }
 
     public async setItemInfo(info: BossWinnerItemIF) {
-        GameUtils.getInstance().setString(this.userName, info.userName);
-        if (info.rewardGiftCnt) {
-            GameUtils.getInstance().setString(this.giftName, `${info.rewardGiftName} x${info.rewardGiftCnt}`); //获得礼物的名称
+        if (Number(info.userId) != 0) {
+            this.bossEmptyTip.node.active = false;
+            this.scrollView.node.active = true;
+
+            GameUtils.getInstance().setString(this.userName, info.userName);
+            if (info.rewardGiftCnt) {
+                GameUtils.getInstance().setString(this.giftName, `${info.rewardGiftName} x${info.rewardGiftCnt}`); //获得礼物的名称
+            } else {
+                GameUtils.getInstance().setString(this.giftName, `${info.rewardGiftName}`); //获得礼物的名称
+            }
+
+            this._playScrollAnim();
         } else {
-            GameUtils.getInstance().setString(this.giftName, `${info.rewardGiftName}`); //获得礼物的名称
+            this.bossEmptyTip.node.active = true;
+            this.scrollView.node.active = false;
+            this.scheduleOnce(() => {
+                this.node.active = false;
+            }, 6);
         }
 
-        this._playScrollAnim();
     }
 
     private _playScrollAnim() {
