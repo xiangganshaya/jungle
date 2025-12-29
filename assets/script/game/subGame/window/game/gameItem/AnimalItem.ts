@@ -16,7 +16,7 @@ const spinePaths = {
     "8": "spine/taishangzhanglao/taishangzhanglao",
 }
 
-const speed = 120;
+const speed = 180;
 
 @ccclass('AnimalItem')
 export class AnimalItem extends Component {
@@ -55,14 +55,15 @@ export class AnimalItem extends Component {
         SpineManager.getInstance().playSpineAni(this.animalAni, null, "run", true, false);
     }
 
-    private _playRun() {
+    private _playRun(isEat: boolean = true) {
         this.node.active = true;
         this.animalAni.node.active = true;
         this.effectAni.node.active = false;
         Tween.stopAllByTarget(this.node);
 
         this._pathIndex++;
-        if (this._pathIndex > this._endPathIndex) {
+        if (isEat && this._pathIndex > this._endPathIndex) {
+            this._pathIndex--;
             GameEventManager.getInstance().dispatchGameEvent(GameEvent.EVENT_GAME_RESULT);
             return;
         }
@@ -82,7 +83,7 @@ export class AnimalItem extends Component {
         tween(this.node)
             .to(distance / speed, { position: pathPos })
             .call(() => {
-                this._playRun();
+                this._playRun(isEat);
             })
             .start();
 
@@ -104,7 +105,7 @@ export class AnimalItem extends Component {
         }
         this._pathIndex = 0;
 
-        this._playRun();
+        this._playRun(true);
     }
 
     public playEatFood(foodId: number, foodPos: Vec3) {
@@ -128,14 +129,16 @@ export class AnimalItem extends Component {
         }
 
         SpineManager.getInstance().playSpineAni(this.animalAni, () => {
-            this.node.active = false;
-            // SpineManager.getInstance().playSpineAni(this.animalAni, null, "run", true, false);
+            // this.node.active = false;
+            SpineManager.getInstance().playSpineAni(this.animalAni, null, "run", true, false);
         }, "take", false, true);
     }
 
     public playEatFoodEffect() {
         this.effectAni.node.active = true;
-        SpineManager.getInstance().playSpineAni(this.effectAni, null, "run", false, true);
+        // SpineManager.getInstance().playSpineAni(this.effectAni, null, "run", false, true);
+        SpineManager.getInstance().playSpineAni(this.animalAni, null, "run", true, false);
+        this._playRun(false);
     }
 
     public getEatEffectWPos() {

@@ -92,8 +92,8 @@ export class LayerBuy extends GameBaseWindow {
         if (count < 1) {
             count = 1;
         }
-        if (count > 999) {
-            count = 999;
+        if (count > 1000) {
+            count = 1000;
         }
 
         return count;
@@ -107,20 +107,20 @@ export class LayerBuy extends GameBaseWindow {
         let countStr = text.replace(/\D/g, ''); // 使用正则表达式过滤掉非数字字符
         let gm = SubGameCtrl.getInstance().getGameModel();
         let count = Number(countStr) || 1;
-        this._exchangeCount = count;
+        this._exchangeCount = this._getRangeCount(count);
         editbox.string = count.toString();
-        // this._updateCostInfo();
+        this._updateCostInfo();
         if (!/^\d+$/.test(text) && text != "") {
             WindowManager.getInstance().blurEditBox();
         }
 
-        this._updateCostCount();
+        // this._updateCostCount();
     }
 
     onEditBoxEnd(editbox: EditBox) {
         WindowManager.getInstance().blurEditBox();
 
-        this._updateCostCount();
+        // this._updateCostCount();
     }
 
     onClickMinus() {

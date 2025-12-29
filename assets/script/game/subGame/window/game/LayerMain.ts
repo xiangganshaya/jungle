@@ -186,12 +186,12 @@ export class LayerMain extends GameBaseWindow {
 
     private _playRun() {
         let gmd = SubGameCtrl.getInstance().getGameModel();
-        if (gmd.winInfo) {
-            this.animal.runToFood(gmd.appearanceAnimalId);
-        } else {
-            this.animal.runToFood(this._paths.length);
-        }
-
+        // if (gmd.winInfo) {
+        //     this.animal.runToFood(gmd.appearanceAnimalId);
+        // } else {
+        //     this.animal.runToFood(this._paths.length);
+        // }
+        this.animal.runToFood(gmd.appearanceAnimalId);
     }
 
     private _getEatFoodItem(id: number) {
@@ -206,14 +206,17 @@ export class LayerMain extends GameBaseWindow {
     private _showBossWin() {
         let gmd = SubGameCtrl.getInstance().getGameModel();
         if (gmd.bossWinInfo) {
-            let userInfo = UserManager.getInstance().getUserInfo();
+            // let userInfo = UserManager.getInstance().getUserInfo();
 
-            if (Number(gmd.bossWinInfo.userId) == Number(userInfo.userId)) {
-                WindowManager.getInstance().showWindow(WinId.LayerBossWin, gmd.bossWinInfo);
-            } else {
-                this.bossWinItem.node.active = true;
-                this.bossWinItem.setItemInfo(gmd.bossWinInfo);
-            }
+            // if (Number(gmd.bossWinInfo.userId) == Number(userInfo.userId)) {
+            //     WindowManager.getInstance().showWindow(WinId.LayerBossWin, gmd.bossWinInfo);
+            // } else {
+            //     this.bossWinItem.node.active = true;
+            //     this.bossWinItem.setItemInfo(gmd.bossWinInfo);
+            // }
+
+            this.bossWinItem.node.active = true;
+            this.bossWinItem.setItemInfo(gmd.bossWinInfo);
         }
     }
 
@@ -240,31 +243,32 @@ export class LayerMain extends GameBaseWindow {
         let gmd = SubGameCtrl.getInstance().getGameModel();
         let animalId = gmd.appearanceAnimalId;
         let winInfo = gmd.winInfo;
-        if (winInfo) {
-            let foodItem = this._getEatFoodItem(animalId);
-            this.animal.playEatFood(animalId, foodItem.node.getPosition());
-            let foodPos = this.food.node.getParent().getComponent(UITransform).convertToNodeSpaceAR(foodItem.getFoodWPos());
-            let effectPos = this.animal.node.getParent().getComponent(UITransform).convertToNodeSpaceAR(this.animal.getEatEffectWPos());
-            this.food.node.setPosition(foodPos);
-            GameUtils.getInstance().setSpriteFrameByName(this.food, "image/images/d-" + animalId);
-            this.food.node.active = true;
-            this.food.node.setScale(1.3, 1.3);
+        let foodItem = this._getEatFoodItem(animalId);
+        this.animal.playEatFood(animalId, foodItem.node.getPosition());
+        let foodPos = this.food.node.getParent().getComponent(UITransform).convertToNodeSpaceAR(foodItem.getFoodWPos());
+        let effectPos = this.animal.node.getParent().getComponent(UITransform).convertToNodeSpaceAR(this.animal.getEatEffectWPos());
+        this.food.node.setPosition(foodPos);
+        GameUtils.getInstance().setSpriteFrameByName(this.food, "image/images/d-" + animalId);
+        this.food.node.active = true;
+        this.food.node.setScale(1.3, 1.3);
 
-            Tween.stopAllByTarget(this.food.node);
-            tween(this.food.node)
-                .to(0.6, { position: effectPos, scale: new Vec3(0.0, 0.0) })
-                .call(() => {
-                    this.animal.playEatFoodEffect();
-                })
-                .delay(0.2)
-                .call(() => {
+        Tween.stopAllByTarget(this.food.node);
+        tween(this.food.node)
+            .to(0.6, { position: effectPos, scale: new Vec3(0.0, 0.0) })
+            .call(() => {
+                this.animal.playEatFoodEffect();
+            })
+            .delay(0.2)
+            .call(() => {
+                this.food.node.active = false;
+                if (winInfo) {
                     this._showWin(winInfo);
-                    this.food.node.active = false;
-                })
-                .start();
-        } else {
-            WindowManager.getInstance().showSystemTip("很遗憾，与仙者暂无缘分～");
-        }
+                } else {
+                    WindowManager.getInstance().showSystemTip("很遗憾，与仙者暂无缘分～");
+                }
+            })
+            .start();
+
 
     }
 
@@ -289,17 +293,21 @@ export class LayerMain extends GameBaseWindow {
         if (this._gameState == GameState.SETTLE) {
             this._setAnimalInfo();
 
-            if (gmd.winInfo) {
-                let dt = Math.floor((new Date().getTime() - gmd.screeningTime) / 1000);
-                dt = gmd.statusStarted + dt;
-                if (dt >= 3) {
-                    this._playEat();
-                } else {
-                    this._playRun();
-                }
-            } else {
+            let dt = Math.floor((new Date().getTime() - gmd.screeningTime) / 1000);
+            dt = gmd.statusStarted + dt;
+            // if (gmd.winInfo) {
+            //     if (dt >= 5) {
+            //         this._playEat();
+            //     } else {
+            //         this._playRun();
+            //     }
+            // } else {
+            //     this._playRun();
+            // }
+            if (dt <= 5) {
                 this._playRun();
             }
+
             if (gmd.bossWinInfo) {
                 // let userInfo = UserManager.getInstance().getUserInfo();
                 // if (Number(gmd.bossWinInfo.userId) == Number(userInfo.userId)) {

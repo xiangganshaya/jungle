@@ -52,7 +52,8 @@ export class FoodItem extends Component {
             this.buyCount.node.active = false;
             if (this._aniName != "run") {
                 this._aniName = "run";
-                SpineManager.getInstance().playSpineAni(this.foodAni, null, this._aniName, true, false);
+                SpineManager.getInstance().playSpineAniByStart(this.foodAni, null, this._aniName, Math.random()*0.7,true, false);
+                this.foodAni
             }
             return;
         }
