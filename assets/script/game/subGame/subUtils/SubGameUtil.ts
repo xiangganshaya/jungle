@@ -265,7 +265,7 @@ export default class SubGameUtil {
 
     // vant提示框
     xmtoast(message: any = '') {
-        WindowManager.getInstance().showSystemTip(message);
+        WindowManager.getInstance().showSystemTip(message,1.1);
     }
 
     showToast(d: any) {

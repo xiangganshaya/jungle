@@ -14,6 +14,8 @@ const { ccclass, property } = _decorator;
 export class FoodItem extends Component {
     @property(sp.Skeleton)
     foodAni: sp.Skeleton = null;
+    @property(sp.Skeleton)
+    foodEffectAni: sp.Skeleton = null;
     @property(Sprite)
     food: Sprite = null;
     @property(Sprite)
@@ -38,8 +40,9 @@ export class FoodItem extends Component {
         this._info = info;
 
         GameUtils.getInstance().setString(this.foodName, this._info.foodName);
-
-        SpineManager.getInstance().playSpineAni(this.foodAni, null, "run", true, false);
+        this.foodEffectAni.paused = true;
+        this.foodEffectAni.node.active = false;
+        // SpineManager.getInstance().playSpineAniByStart(this.foodAni, null, "run", Math.random() * 0.7, true, false);
 
         this.updateItemBetInfo(0);
 
@@ -47,13 +50,19 @@ export class FoodItem extends Component {
     }
 
     public updateItemBetInfo(count: number) {
+        this.food.node.active = true;
+
         if (count <= 0) {
             this.buyCountBg.node.active = false;
             this.buyCount.node.active = false;
+            // this.foodAni.paused = true;
             if (this._aniName != "run") {
                 this._aniName = "run";
-                SpineManager.getInstance().playSpineAniByStart(this.foodAni, null, this._aniName, Math.random()*0.7,true, false);
-                this.foodAni
+                this.foodEffectAni.paused = true;
+                this.foodEffectAni.node.active = false;
+                SpineManager.getInstance().playSpineAni(this.foodAni, null, this._aniName, true, false);
+                // SpineManager.getInstance().playSpineAniByStart(this.foodAni, null, this._aniName, Math.random() * 0.7, true, false);
+
             }
             return;
         }
@@ -65,6 +74,9 @@ export class FoodItem extends Component {
         if (this._aniName != "run2") {
             this._aniName = "run2";
             SpineManager.getInstance().playSpineAni(this.foodAni, null, this._aniName, true, false);
+            // SpineManager.getInstance().playSpineAniByStart(this.foodAni, null, this._aniName, Math.random() * 0.7, true, false);
+            this.foodEffectAni.node.active = true;
+            SpineManager.getInstance().playSpineAni(this.foodEffectAni, null, "run", true, false);
         }
     }
 
@@ -87,6 +99,10 @@ export class FoodItem extends Component {
 
     public getFoodId() {
         return this._info.id;
+    }
+
+    public playEatEffect() {
+        this.food.node.active = false;
     }
 
     public getFoodWPos() {

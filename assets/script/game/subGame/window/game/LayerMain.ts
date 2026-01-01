@@ -181,7 +181,7 @@ export class LayerMain extends GameBaseWindow {
         let gmd = SubGameCtrl.getInstance().getGameModel();
 
         this.animal.node.active = true;
-        this.animal.setItemInfo(gmd.appearanceAnimalId, this._paths);
+        this.animal.setItemInfo(gmd.appearanceAnimalId);
     }
 
     private _playRun() {
@@ -249,6 +249,8 @@ export class LayerMain extends GameBaseWindow {
         let effectPos = this.animal.node.getParent().getComponent(UITransform).convertToNodeSpaceAR(this.animal.getEatEffectWPos());
         this.food.node.setPosition(foodPos);
         GameUtils.getInstance().setSpriteFrameByName(this.food, "image/images/d-" + animalId);
+
+        foodItem.playEatEffect();
         this.food.node.active = true;
         this.food.node.setScale(1.3, 1.3);
 
@@ -264,7 +266,7 @@ export class LayerMain extends GameBaseWindow {
                 if (winInfo) {
                     this._showWin(winInfo);
                 } else {
-                    WindowManager.getInstance().showSystemTip("很遗憾，与仙者暂无缘分～");
+                    WindowManager.getInstance().showSystemTip("很遗憾，与仙者暂无缘分～", 1.5);
                 }
             })
             .start();

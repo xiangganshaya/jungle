@@ -162,7 +162,11 @@ export default class SysTipView extends GameBaseWindow {
             if (tipData.time >= tipData.tipItem.getShowTime()) {
                 //this._tip[i].tipItem.node.position.y += this._moveSpeed * dt;
                 let y = tipData.tipItem.node.position.y
-                let v = Math.abs((this._positionY[2] - y) / (1 - tipData.time))
+                let t = Math.abs(1 - tipData.time);
+                if (t == 0) {
+                    t = 0.01;
+                }
+                let v = Math.abs((this._positionY[2] - y) / t);
                 // tipData.tipItem.node.position.y += v * dt
                 let pos = tipData.tipItem.node.position;
                 tipData.tipItem.node.setPosition(pos.x, pos.y + v * dt);

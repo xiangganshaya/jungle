@@ -228,6 +228,7 @@ export default class SpineManager {
         // spine.node.active = false;
         // spine.node.active = true;
 
+        spine.paused = true;
         if (!spine.isAnimationCached()) {
             spine.clearTracks();
         }
@@ -241,6 +242,7 @@ export default class SpineManager {
         } else {
             track.animationStart = startdt;
         }
+        spine.paused = false;
         // spine.animation = name;
         // spine.loop = loop;
 

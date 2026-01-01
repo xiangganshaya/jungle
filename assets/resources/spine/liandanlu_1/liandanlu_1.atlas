@@ -1,13 +1,13 @@
 
 liandanlu_1.png
-size: 121,119
+size: 121,128
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 ldl
   rotate: false
   xy: 2, 2
-  size: 117, 115
-  orig: 117, 115
-  offset: 0, 0
+  size: 117, 124
+  orig: 117, 126
+  offset: 0, 2
   index: -1
