@@ -6,17 +6,25 @@
         "asyncFunctions": true
       },
       "buildPath": "project://build",
-      "outputName": "web-mobile",
+      "outputName": "web-mobile-path",
       "mainBundleCompressionType": "merge_all_json",
       "platform": "web-mobile",
-      "md5Cache": true,
+      "md5Cache": false,
       "useSplashScreen": false,
       "overwriteProjectSettings": {
         "includeModules": {
           "gfx-webgl2": "inherit-project-setting"
         }
       },
-      "name": "DZSH-3D"
+      "name": "路径编辑器",
+      "scenes": [
+        {
+          "url": "db://assets/scene/game-edit.scene",
+          "uuid": "771e751a-16f1-4c28-9efb-6f391a2b6322"
+        }
+      ],
+      "startScene": "771e751a-16f1-4c28-9efb-6f391a2b6322",
+      "debug": false
     },
     "options": {
       "web-mobile": {
@@ -27,6 +35,11 @@
     },
     "taskOptionsMap": {
       "1728570266310": {
+        "orientation": "portrait",
+        "embedWebDebugger": false,
+        "__version__": "1.0.1"
+      },
+      "1767345182252": {
         "orientation": "portrait",
         "embedWebDebugger": false,
         "__version__": "1.0.1"

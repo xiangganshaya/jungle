@@ -8,17 +8,25 @@
       "asyncFunctions": true
     },
     "buildPath": "project://build",
-    "outputName": "web-mobile",
+    "outputName": "web-mobile-path",
     "mainBundleCompressionType": "merge_all_json",
     "platform": "web-mobile",
-    "md5Cache": true,
+    "md5Cache": false,
     "useSplashScreen": false,
     "overwriteProjectSettings": {
       "includeModules": {
         "gfx-webgl2": "inherit-project-setting"
       }
     },
-    "name": "DZSH-3D"
+    "name": "路径编辑器",
+    "scenes": [
+      {
+        "url": "db://assets/scene/game-edit.scene",
+        "uuid": "771e751a-16f1-4c28-9efb-6f391a2b6322"
+      }
+    ],
+    "startScene": "771e751a-16f1-4c28-9efb-6f391a2b6322",
+    "debug": false
   },
   "BuildTaskManager": {
     "taskMap": {
@@ -28,7 +36,7 @@
         "progress": 1,
         "state": "success",
         "stage": "build",
-        "message": "2025-12-31 19:08:53 build success in 16 s!",
+        "message": "2026-1-2 17:58:07 build success in 16 s!",
         "detailMessage": "// ---- build task cocos-service：onBeforeCompressSettings ----\r",
         "options": {
           "name": "DZSH-3D",
@@ -76,7 +84,65 @@
           "__version__": "1.3.8",
           "logDest": "project://temp/builder/log/web-mobile10-10-2024 22-24.log"
         },
-        "time": "12-31-2025 19:08:36",
+        "time": "1-2-2026 17:57:51",
+        "dirty": false
+      },
+      "1767345182252": {
+        "type": "build",
+        "id": "1767345182252",
+        "progress": 1,
+        "state": "success",
+        "stage": "build",
+        "message": "2026-1-2 17:32:44 build success in 19 s!",
+        "detailMessage": "// ---- build task web-mobile：onBeforeCopyBuildTemplate ----\r",
+        "options": {
+          "name": "路径编辑器",
+          "server": "",
+          "platform": "web-mobile",
+          "buildPath": "project://build",
+          "debug": false,
+          "md5Cache": false,
+          "skipCompressTexture": false,
+          "sourceMaps": false,
+          "overwriteProjectSettings": {
+            "includeModules": {
+              "gfx-webgl2": "inherit-project-setting",
+              "physics": "inherit-project-setting",
+              "physics-2d": "inherit-project-setting"
+            },
+            "macroConfig": {
+              "cleanupImageCache": "inherit-project-setting"
+            }
+          },
+          "nativeCodeBundleMode": "both",
+          "polyfills": {
+            "asyncFunctions": true
+          },
+          "experimentalEraseModules": false,
+          "startSceneAssetBundle": false,
+          "bundleConfigs": [],
+          "useBuiltinServer": false,
+          "mainBundleIsRemote": false,
+          "mainBundleCompressionType": "merge_all_json",
+          "useSplashScreen": false,
+          "bundleCommonChunk": false,
+          "packAutoAtlas": true,
+          "startScene": "771e751a-16f1-4c28-9efb-6f391a2b6322",
+          "outputName": "web-mobile-path",
+          "taskName": "web-mobile-path",
+          "scenes": [
+            {
+              "url": "db://assets/scene/game-edit.scene",
+              "uuid": "771e751a-16f1-4c28-9efb-6f391a2b6322"
+            }
+          ],
+          "wasmCompressionMode": false,
+          "packages": {},
+          "__version__": "1.3.8",
+          "buildMode": "normal",
+          "logDest": "project://temp/builder/log/web-mobile1-2-2026 17-13.log"
+        },
+        "time": "1-2-2026 17:32:24",
         "dirty": false
       }
     }

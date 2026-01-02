@@ -308,6 +308,8 @@ export class LayerMain extends GameBaseWindow {
             // }
             if (dt <= 5) {
                 this._playRun();
+            }else {
+                this.animal.stopRun();
             }
 
             if (gmd.bossWinInfo) {

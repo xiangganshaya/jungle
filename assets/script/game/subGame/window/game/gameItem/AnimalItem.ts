@@ -87,13 +87,13 @@ export class AnimalItem extends Component {
         this.animalAni.paused = true;
         let skd = await SpineManager.getInstance().getSkeletonData(skp);
         this.animalAni.skeletonData = skd;
-        this.node.active = true;
+        // this.node.active = true;
         SpineManager.getInstance().playSpineAni(this.animalAni, null, "run", true, false);
     }
 
     private _createPath() {
-        let path: AnimalPathInfo = this._pathConfig.path[0];
-        this._startPos = v2(path.pos[0][0], path.pos[0][1]);
+        let startPath: AnimalPathInfo = this._pathConfig.path[0];
+        this._startPos = v2(startPath.pos[0][0], startPath.pos[0][1]);
         this._paths = [];
         if (this._paths.length <= 0) {
             this._paths = [];
@@ -260,6 +260,8 @@ export class AnimalItem extends Component {
                 GameEventManager.getInstance().dispatchGameEvent(GameEvent.EVENT_GAME_RESULT);
             }
             this._isEating = true;
+
+            return;
 
             let tps = path.getPoint(this._curPathStartTime, true);
             let p02 = this._transform(tps[0]);
