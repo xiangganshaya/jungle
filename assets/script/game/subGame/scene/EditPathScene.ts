@@ -17,12 +17,16 @@ export class EditPathScene extends Component {
 
     @property(Graphics)
     graphics: Graphics = null;
+    @property(Graphics)
+    graphicsPoint: Graphics = null;
 
     @property(Sprite)
     pointSprite: Sprite = null;
 
     @property(Label)
     selectBezier: Label = null;
+    @property(EditBox)
+    bezierPath: EditBox = null;
     @property(EditBox)
     bezierTime: EditBox = null;
     @property(Node)
@@ -60,6 +64,7 @@ export class EditPathScene extends Component {
 
     private _isEating: boolean = false;
 
+    private _selectPathIndex: number = 0;
     private _selectBezierIndex: number = 0;
     private _bezierPoints: Node[] = [];
     //---------------
@@ -88,7 +93,7 @@ export class EditPathScene extends Component {
 
     }
 
-    public async setItemInfo() {
+    public setItemInfo() {
         this._isModelRotation = false;
         this._startPos = Vec2.ZERO;
         this._bornPos = Vec2.ZERO;
@@ -99,9 +104,10 @@ export class EditPathScene extends Component {
         this._y = 0;
         this._rotation = 0;
         this._aliveTime = 0;
-        this._pathConfig = this.pathConfigJson.json[0];
+        this._pathConfig = this.pathConfigJson.json[this._selectPathIndex];
         if (!this._pathConfig) {
             this.stopRun();
+            this.selectBezier.string = `未找到路径配置(${this._selectPathIndex})`;
             return;
         }
 
@@ -118,6 +124,9 @@ export class EditPathScene extends Component {
     }
 
     private _createPath() {
+        if (!this._pathConfig) {
+            return;
+        }
         let path: AnimalPathInfo = this._pathConfig.path[0];
         this._startPos = v2(path.pos[0][0], path.pos[0][1]);
         this._paths = [];
@@ -139,7 +148,10 @@ export class EditPathScene extends Component {
                     lastPos = v2(pc.pos[2], pc.pos[3]);
                     points.push(lastPos);
                 }
-                this._paths.push(Bezier.createBezier(points, pc.time, true));
+                let bezier = Bezier.createBezier(points, pc.time, true);
+                let length = bezier.getBezierLength();
+                pc.length = length;
+                this._paths.push(bezier);
             }
         }
 
@@ -147,15 +159,24 @@ export class EditPathScene extends Component {
         this._curPathStartTime = 0;
         this._x = 0;
         this._y = 0;
+
+        this.pathConfigJson.json[this._selectPathIndex] = this._pathConfig;
     }
 
     private _drawPath() {
+        if (!this._pathConfig) {
+            return;
+        }
+
         this._createPath();
+
         log("pathConfig", JSON.stringify(this._pathConfig));
 
         this.graphics.clear();
+        this.graphicsPoint.clear();
         // this.graphics.strokeColor = color(255, 0, 0, 255);
         this.graphics.lineWidth = 8;
+        this.graphicsPoint.lineWidth = 8;
 
         for (let i = 0; i < this._bezierPoints.length; i++) {
             this._bezierPoints[i].removeFromParent();
@@ -226,9 +247,36 @@ export class EditPathScene extends Component {
         }
 
         this.graphics.stroke();
+
+        //绘制点的连线
+        let tps = this._paths[0].getPoint(0, true);
+        let p02 = this._transform(tps[0]);
+        this.graphicsPoint.moveTo(p02.x, p02.y);
+        for (let i = 0; i < this._paths.length; i++) {
+            let bezierPoints = this._paths[i].getPoints();
+            for (let j = 0; j < bezierPoints.length; j++) {
+                let p = this._transform(bezierPoints[j]);
+                this.graphicsPoint.lineTo(p.x, p.y);
+            }
+        }
+        this.graphicsPoint.stroke();
+        //在各个点上画点
+        this.graphicsPoint.moveTo(p02.x, p02.y);
+        for (let i = 0; i < this._paths.length; i++) {
+            let bezierPoints = this._paths[i].getPoints();
+            for (let j = 0; j < bezierPoints.length; j++) {
+                let p = this._transform(bezierPoints[j]);
+                this.graphicsPoint.circle(p.x, p.y, 8);
+            }
+        }
+        this.graphicsPoint.fill();
+
     }
 
     private _playRun(isEat: boolean = true) {
+        if (!this._pathConfig) {
+            return;
+        }
         this.animal.node.active = true;
         this._aliveTime = 0;
         this._curPathIndex = 0;
@@ -242,6 +290,9 @@ export class EditPathScene extends Component {
     }
 
     public runToFood(foodId: number) {
+        if (!this._pathConfig) {
+            return;
+        }
         this.animal.node.active = true;
         this._playRun(true);
     }
@@ -270,7 +321,7 @@ export class EditPathScene extends Component {
     private _updateTopInfo() {
         let pathIndex = this._selectBezierIndex;
         let posPath: AnimalPathInfo = this._pathConfig.path[pathIndex];
-        this.selectBezier.string = `当前选择了第 ${pathIndex} 条 曲线`;
+        this.selectBezier.string = `当前选择了第 ${this._selectPathIndex}中的第${pathIndex} 条 曲线`;
         this.bezierStartNode.active = (pathIndex == 0);
 
         this.bezierTime.string = "";
@@ -298,8 +349,22 @@ export class EditPathScene extends Component {
         }
     }
 
+    onEditBoxPathEnd() {
+        log("onEditBoxPathEnd")
+        let t = Number(this.bezierPath.placeholder);
+        if (this.bezierPath.string != "") {
+            t = Number(this.bezierPath.string);
+        }
+        this._selectPathIndex = t;
+
+        this.setItemInfo();
+    }
+
     onEditBoxTimeEnd() {
         log("onEditBoxTimeEnd")
+        if (!this._pathConfig) {
+            return;
+        }
         let posPath: AnimalPathInfo = this._pathConfig.path[this._selectBezierIndex];
         let t = Number(this.bezierTime.placeholder).toFixed(2);
         if (this.bezierTime.string != "") {
@@ -312,6 +377,9 @@ export class EditPathScene extends Component {
 
     onEditBoxStartXEnd() {
         log("onEditBoxStartXEnd")
+        if (!this._pathConfig) {
+            return;
+        }
         let posPath: AnimalPathInfo = this._pathConfig.path[this._selectBezierIndex];
         let v = Number(this.bezierStartX.placeholder).toFixed(2);
         if (this.bezierStartX.string != "") {
@@ -324,6 +392,9 @@ export class EditPathScene extends Component {
 
     onEditBoxStartYEnd() {
         log("onEditBoxStartYEnd")
+        if (!this._pathConfig) {
+            return;
+        }
         let posPath: AnimalPathInfo = this._pathConfig.path[this._selectBezierIndex];
         let v = Number(this.bezierStartY.placeholder).toFixed(2);
         if (this.bezierStartY.string != "") {
@@ -336,6 +407,9 @@ export class EditPathScene extends Component {
 
     onEditBoxMidXEnd() {
         log("onEditBoxMidXEnd")
+        if (!this._pathConfig) {
+            return;
+        }
         let posPath: AnimalPathInfo = this._pathConfig.path[this._selectBezierIndex];
         let v = Number(this.bezierMidX.placeholder).toFixed(2);
         if (this.bezierMidX.string != "") {
@@ -352,6 +426,9 @@ export class EditPathScene extends Component {
 
     onEditBoxMidYEnd() {
         log("onEditBoxMidYEnd")
+        if (!this._pathConfig) {
+            return;
+        }
         let posPath: AnimalPathInfo = this._pathConfig.path[this._selectBezierIndex];
         let v = Number(this.bezierMidY.placeholder).toFixed(2);
         if (this.bezierMidY.string != "") {
@@ -368,6 +445,9 @@ export class EditPathScene extends Component {
 
     onEditBoxEndXEnd() {
         log("onEditBoxEndXEnd")
+        if (!this._pathConfig) {
+            return;
+        }
         let posPath: AnimalPathInfo = this._pathConfig.path[this._selectBezierIndex];
         let v = Number(this.bezierEndX.placeholder).toFixed(2);
         if (this.bezierEndX.string != "") {
@@ -384,6 +464,9 @@ export class EditPathScene extends Component {
 
     onEditBoxEndYEnd() {
         log("onEditBoxEndYEnd")
+        if (!this._pathConfig) {
+            return;
+        }
         let posPath: AnimalPathInfo = this._pathConfig.path[this._selectBezierIndex];
         let v = Number(this.bezierEndY.placeholder).toFixed(2);
         if (this.bezierEndY.string != "") {
@@ -400,39 +483,24 @@ export class EditPathScene extends Component {
 
     onClickBezier(event: EventTouch) {
         log("onClickBezier", event.target.name);
+        if (!this._pathConfig) {
+            return;
+        }
         this._selectBezierIndex = Number(event.target.name);
         this._updateTopInfo();
     }
 
     onClickSave() {
-        let totalTime = 0;
-        let pc: AnimalPath = this._pathConfig;
-        for (let i = 0; i < pc.path.length; i++) {
-            totalTime += pc.path[i].time;
-        }
-        pc.totalTime = totalTime;
-
         for (const key in this.pathConfigJson.json) {
-            if (key == "0") {
-                this.pathConfigJson.json[key] = pc;
-            } else {
-                let pathList = pc.path.concat([]);
-                let index = Number(key);
-                let tempPos = pathList[index - 1];
-                pathList.splice(index, 0, {
-                    pos:
-                        [tempPos.pos[tempPos.pos.length - 2],
-                        tempPos.pos[tempPos.pos.length - 1],
-                        tempPos.pos[tempPos.pos.length - 2],
-                        tempPos.pos[tempPos.pos.length - 1],
-                        ],
-                    time: 0.6,
-                });
-                this.pathConfigJson.json[key] = {
-                    path: pathList,
-                    totalTime: totalTime + 0.6,
-                };
+            let jd: AnimalPath = this.pathConfigJson.json[key];
+            let totalTime = 0;
+            let totalLength = 0;
+            for (let i = 0; i < jd.path.length; i++) {
+                totalTime += jd.path[i].time;
+                totalLength += jd.path[i].length;
             }
+            jd.totalTime = totalTime;
+            jd.totalLength = totalLength;
         }
 
         this._download("path.json", JSON.stringify(this.pathConfigJson.json));

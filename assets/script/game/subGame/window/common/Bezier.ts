@@ -200,6 +200,11 @@ export default class Bezier {
 
         return t2;
     }
+
+    //计算bezier曲线长度
+    public getBezierLength(): number {
+        return this._totalLength;
+    }
 }
 
 
