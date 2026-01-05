@@ -176,7 +176,7 @@ export class EditPathScene extends Component {
         this.graphicsPoint.clear();
         // this.graphics.strokeColor = color(255, 0, 0, 255);
         this.graphics.lineWidth = 8;
-        this.graphicsPoint.lineWidth = 8;
+        this.graphicsPoint.lineWidth = 4;
 
         for (let i = 0; i < this._bezierPoints.length; i++) {
             this._bezierPoints[i].removeFromParent();
